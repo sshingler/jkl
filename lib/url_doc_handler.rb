@@ -1,13 +1,11 @@
 require 'hpricot'
 require 'rest_client'
 
-module URLDocHandler
-
-  include RestClient
+module Jkl
   
   USER_AGENT = 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.1) Gecko/20070107 Firefox/2.0.0.1'
   
-  def get_text(text)
+  def sane_text(text)
     str = ""
     text.to_s.gsub(/<\/?[^>]*>/, "").split("\r").each do |l| #remove tags
       l = l.chomp.gsub("\t",'').gsub(/\s{2,}/,'') # remove tabs and larger spaces
@@ -16,9 +14,9 @@ module URLDocHandler
     str
   end
   
-  def from_url(url)
+  def from_doc(response)
     begin
-      Hpricot(get_from url)
+      Hpricot(response)
     rescue  URI::InvalidURIError => e
       puts("WARN: Problem with getting a connection: #{e}")
     rescue SocketError => e

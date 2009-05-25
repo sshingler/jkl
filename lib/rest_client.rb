@@ -1,13 +1,13 @@
 require 'net/http' 
 
-module RestClient
+module Jkl
   
   def post_to(uri, post_args)
     resp, data = Net::HTTP.post_form(uri, post_args)
     data
   end
   
-  def get_from(uri)
+  def from(uri)
     res = Net::HTTP.get_response(URI.parse(uri))
     res.body
   end

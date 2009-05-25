@@ -1,10 +1,8 @@
 require 'lib/rest_client'
 
-module CalaisClient
+module Jkl
 
-include RestClient
-
-LICENSE_ID = "pha8v7tap4zfxtmax3ry4nu9"
+LICENSE_ID = YAML::load_file('keys.yml')['calais']
 C_URI = URI.parse('http://api.opencalais.com/enlighten/rest/')
 
   def call(content)  

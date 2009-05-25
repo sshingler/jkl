@@ -1,7 +1,7 @@
 require 'hpricot'
 require 'open-uri'
 
-module RSSClient
+module Jkl
   
   USER_AGENT = 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.1) Gecko/20070107 Firefox/2.0.0.1'
   
