@@ -13,7 +13,7 @@ include CalaisClient
 include URLDocHandler
 
 Given "i surf to '$url'" do |url|
-  visits url
+  visit url
 end
 
 When /^I request tag data from calais$/ do
@@ -55,7 +55,6 @@ Then /^I should see some items$/ do
   end
   @links.should_not == nil
   @links.length.should > 0
-  puts @links.inspect
 end
 
 Then /^I should see some text$/ do
