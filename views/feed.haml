@@ -1,0 +1,10 @@
+.header 
+  %p here's the metadata for that tag:
+  %ul.twits
+    - @tags.each do |n,v|
+      %li 
+        == #{n} 
+        %ul
+          - v.each do |i|
+            %li
+              == #{i}

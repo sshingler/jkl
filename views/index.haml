@@ -1,0 +1,6 @@
+.header 
+  %p here are the top twitter trends right now:
+  %ul.twits
+    - @trends.each do |trend|
+      %li 
+        %a{:href => '/feed/'+URI.encode(trend['name'].gsub('#',''))}== #{trend['name']}

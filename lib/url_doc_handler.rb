@@ -3,13 +3,11 @@ require 'rest_client'
 
 module Jkl
   
-  USER_AGENT = 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.1) Gecko/20070107 Firefox/2.0.0.1'
-  
-  def sane_text(text)
+  def sanitize_text(text)
     str = ""
-    text.to_s.gsub(/<\/?[^>]*>/, "").split("\r").each do |l| #remove tags
+    text.to_s.gsub(/<\/?[^>]*>/, "").split("\r").each do |l| # remove tags
       l = l.chomp.gsub("\t",'').gsub(/\s{2,}/,'') # remove tabs and larger spaces
-      str = str << l unless l.count(" ") < 5 #remove short lines - ususally just navigation
+      str << l unless l.count(" ") < 5 # remove short lines - ususally just navigation
     end
     str
   end

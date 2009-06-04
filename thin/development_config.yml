@@ -1,0 +1,12 @@
+---
+    environment: development
+    chdir: /app/blackbox/current/
+    address: 0.0.0.0
+    port: 4567
+    pid: /app/blackbox/current/tmp/pids/thin.pid
+    rackup: /app/blackbox/current/thin/config.ru
+    log: /app/blackbox/current/log/thin.log
+    max_conns: 1024
+    timeout: 30
+    max_persistent_conns: 512
+    daemonize: true

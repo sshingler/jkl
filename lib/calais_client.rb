@@ -1,3 +1,4 @@
+require 'json'
 require 'lib/rest_client'
 
 module Jkl
@@ -5,12 +6,12 @@ module Jkl
 LICENSE_ID = YAML::load_file('keys.yml')['calais']
 C_URI = URI.parse('http://api.opencalais.com/enlighten/rest/')
 
-  def call(content)  
-    post_args = { 'licenseID' => LICENSE_ID, 'content' => content, 'paramsXML' => paramsXML('text/simple') }
+  def get_from_calais(content)  
+    post_args = { 'licenseID' => LICENSE_ID, 'content' => content, 'paramsXML' => paramsXML('application/xml') }
     post_to(C_URI, post_args)
   end
   
-  def get_tags(response)
+  def get_tags_from_rdf(response)
     h = {}
     index1 = response.index('terms of service.-->')
     index1 = response.index('<!--', index1)
@@ -19,9 +20,15 @@ C_URI = URI.parse('http://api.opencalais.com/enlighten/rest/')
     lines = txt.split("\n")
     lines.each {|line|
       index = line.index(":")
+      #TODO refactor out into descriptive methods
       h[line[0...index]] = line[index+1..-1].split(',').collect {|x| x.strip} if index
     }
     h
+  end
+  
+  def get_tags_from_json(response)
+    result = JSON.parse @response
+    result.each{|k,v| puts "#{k} : #{v}"}
   end
 
   private
@@ -31,8 +38,8 @@ C_URI = URI.parse('http://api.opencalais.com/enlighten/rest/')
     <c:params xmlns:c="http://s.opencalais.com/1/pred/"
            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
            <c:processingDirectives
-           c:contentType="text/raw"
-           c:outputFormat="'+format+'">
+           c:contentType="text/txt"
+           c:outputFormat="#{format}">
            </c:processingDirectives>  
            <c:userDirectives />
            <c:externalMetadata />

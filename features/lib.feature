@@ -14,15 +14,20 @@ Feature: Library features
 	And I should see some tags
 	
   Scenario: Make a restful post to yahoo
-    When i post some data to yahoo
+    When I post some data to yahoo
 	Then I should get a response
 
   Scenario: Make a restful get
-    When i make a restful get request
+    When I make a restful get request
 	Then I should get a response
 	And I should see some text
 
   Scenario: Get some RSS
-    When i request some RSS
+    When I request some RSS
 	Then I should get a response
     And I should see some items
+
+  Scenario: Sanitize some text
+	Given I have 'the cat sat on the mat'
+	When I sanitize this text
+	Then it should be ok

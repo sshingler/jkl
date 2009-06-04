@@ -10,10 +10,10 @@ require 'lib/url_doc_handler.rb'
 include Jkl
 
 When /^I request tag data from calais$/ do
-  @response = call "Barack Obama said today that he expects there to be conflict within his new security team after confirming Hillary Clinton as his choice for US Secretary of State."
+  @response = get_from_calais "Barack Obama said today that he expects there to be conflict within his new security team after confirming Hillary Clinton as his choice for US Secretary of State."
 end
 
-When /^i post some data to yahoo$/ do
+When /^I post some data to yahoo$/ do
   @url = URI.parse('http://search.yahooapis.com/ContentAnalysisService/V1/termExtraction')
   appid = LICENSE_ID = YAML::load_file('keys.yml')['yahoo']
   context = URI.encode('Italian sculptors and painters of the renaissance favored the Virgin Mary for inspiration')
@@ -21,19 +21,19 @@ When /^i post some data to yahoo$/ do
   @response = post_to @url, post_args
 end
 
-When /^i request some RSS$/ do
-  url = "http://www.topix.net/rss/search/article?x=0&y=0&q=iraq"
-  @response = from_rss url
+When /^I request some RSS$/ do
+  url = "#{YAML::load_file('config.yml')['topix']}iraq"
+  @response = get_from_as_xml url
 end
 
-When /^i make a restful get request$/ do
+When /^I make a restful get request$/ do
   url = "http://news.bbc.co.uk/1/hi/uk_politics/7677419.stm" 
-  @response = from url
+  @response = get_from url
 end
 
 When /^I request trends data from twitter$/ do
   @url = 'http://search.twitter.com/trends.json'
-  @response = from @url
+  @response = get_from @url
 end
 
 Then /^I should get a response$/ do
@@ -41,7 +41,7 @@ Then /^I should get a response$/ do
 end
 
 Then /^I should see some items$/ do
-  @items = get_items @response
+  @items = get_items_from @response
   @links = []
   @items.each do |item|
     @links << attribute_from(item, :link)
@@ -55,9 +55,9 @@ Then /^I should see some text$/ do
 end
 
 Then /^I should see some tags$/ do
-  tags = get_tags @response
-  tags.class.to_s.should == "Hash"
-  tags.length.should > 0
+  tags = get_tags_from_rdf @response
+  tags.should_not != nil
+  puts tags.inspect
 end
 
 Then /^I should see some trends$/ do
@@ -67,4 +67,16 @@ Then /^I should see some trends$/ do
     subject['name'].length.should > 1
     subject['url'].length.should > 1
   end
+end
+
+Given "I have '$text'" do |text|
+  @text = text
+end
+
+When /^I sanitize this text$/ do
+  @response = sanitize_text(@text)
+end
+
+Then /^it should be ok$/ do
+  @response.should_not == nil
 end
