@@ -10,7 +10,7 @@ require 'lib/url_doc_handler.rb'
 include Jkl
 
 Given /^I have some Mock JSON$/ do
-  @json = File.open('output.json','r') {|f| f.readlines}
+  @json = File.open('features/mocks/output.json','r') {|f| f.readlines}
 end
 
 When /^I call my calais lib$/ do
