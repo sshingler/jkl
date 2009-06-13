@@ -9,6 +9,14 @@ require 'lib/url_doc_handler.rb'
 
 include Jkl
 
+Given /^I have some Mock JSON$/ do
+  @json = File.open('output.json','r') {|f| f.readlines}
+end
+
+When /^I call my calais lib$/ do
+  @response = get_tags_from_json @json.to_s
+end
+
 When /^I request tag data from calais$/ do
   @response = get_from_calais "Barack Obama said today that he expects there to be conflict within his new security team after confirming Hillary Clinton as his choice for US Secretary of State."
 end
@@ -55,9 +63,8 @@ Then /^I should see some text$/ do
 end
 
 Then /^I should see some tags$/ do
-  tags = get_tags_from_rdf @response
+  tags = get_tags_from_json @response
   tags.should_not != nil
-  puts tags.inspect
 end
 
 Then /^I should see some trends$/ do

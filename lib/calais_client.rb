@@ -7,7 +7,7 @@ LICENSE_ID = YAML::load_file('keys.yml')['calais']
 C_URI = URI.parse('http://api.opencalais.com/enlighten/rest/')
 
   def get_from_calais(content)  
-    post_args = { 'licenseID' => LICENSE_ID, 'content' => content, 'paramsXML' => paramsXML('application/xml') }
+    post_args = { 'licenseID' => LICENSE_ID, 'content' => content, 'paramsXML' => paramsXML('application/json') }
     post_to(C_URI, post_args)
   end
   
@@ -27,8 +27,16 @@ C_URI = URI.parse('http://api.opencalais.com/enlighten/rest/')
   end
   
   def get_tags_from_json(response)
-    result = JSON.parse @response
-    result.each{|k,v| puts "#{k} : #{v}"}
+    result = JSON.parse response
+    result.delete_if {|key, value| key == "doc" } # ditching the doc
+    result.each{ |key,value| 
+      value.each {|internal_key, internal_value|
+        value.delete_if {|k, v| k == "relevance" } # ditching the relevance score
+        puts "#{internal_key} #{internal_value.class} #{internal_value}" unless internal_value.class == Array
+      }
+      break
+    }
+    result
   end
 
   private
