@@ -1,9 +1,9 @@
 require 'couchrest'
 
 When /^I persist a document$/ do
-  @db = CouchRest.database!("http://127.0.0.1:5984/jkl")
-  @response = @db.save_doc({:key => 'value', 'another key' => 'another value'})
-  doc = @db.get(@response['id'])
-  puts @db.documents.inspect
-  
+  pc = PersistenceClient.new(YAML::load_file('config.yml')['testdb'])
+  @response = pc.persist({:key => 'value', 'another key' => 'another value'})
+  doc = pc.get(@response['id'])
+  announce doc.to_s
+  pc.destroy
 end

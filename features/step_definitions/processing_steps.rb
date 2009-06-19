@@ -9,6 +9,10 @@ Given /^I have some Twitter data$/ do
   
 end
 
+Given /^I have a calais json response$/ do
+  @raw_json = {"name"=>"test", "instances"=>[], "relevance"=>0.062, "_type"=>"SportsEvent", "resolutions"=>[], "_typeGroup"=>"entities", "blank"=>"", "not_available"=> "N/A"}
+end
+
 When /^I get some news stories from the first keyword$/ do
   search_term = @trend['name'].gsub('#','') #removing hash from start of trend name
   puts  search_term
@@ -30,3 +34,10 @@ When /^I request tags for the first story$/ do
   h.each{|k,v| puts "#{k} : #{v}"}
 end
 
+When /^I remove the unwanted items$/ do
+  @processed_json = clean_unwanted_items_from_hash @raw_json
+end
+
+Then /^there should no longer be any "([^\"]*)"$/ do |arg1|
+  @processed_json[arg1].should be_nil
+end

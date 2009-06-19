@@ -9,3 +9,11 @@ Feature: Processing features
     Then I should get a response
 	When I request tags for the first story
 	Then I should get a response
+	
+  Scenario: Clean up blank items from a calais response
+	Given I have a calais json response
+	When I remove the unwanted items
+	Then there should no longer be any "instances"
+	And there should no longer be any "relevance"
+	And there should no longer be any "blank"
+ 	And there should no longer be any "not_available"

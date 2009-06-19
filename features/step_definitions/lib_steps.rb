@@ -6,15 +6,28 @@ require 'lib/rest_client.rb'
 require 'lib/rss_client.rb'
 require 'lib/calais_client.rb'
 require 'lib/url_doc_handler.rb'
+require 'lib/persistence_client.rb'
 
 include Jkl
 
-Given /^I have some Mock JSON$/ do
-  @json = File.open('features/mocks/output.json','r') {|f| f.readlines}
+Given /^I have a Mock Calais response$/ do
+  @json = File.open('features/mocks/output.json','r') {|f| f.readlines.to_s}
 end
 
-When /^I call my calais lib$/ do
-  @response = get_tags_from_json @json.to_s
+#TODO retrieve some stuff from db, delete db, 
+#doc = @db.get(tag['name'])
+#puts doc
+#puts @db.documents.inspect
+When /^I parse this response$/ do
+  pc = PersistenceClient.new(YAML::load_file('config.yml')['testdb'])
+  i = 0
+  get_tag_from_json(@json) do |tag| 
+    i = i+1 # count number of tags
+    @response = pc.persist(tag) 
+  end
+  #checking the number of persisted docs - minus 1 because we don't persist the doc item
+  i.should == JSON.parse(@json).length-1 
+  pc.destroy
 end
 
 When /^I request tag data from calais$/ do
@@ -46,6 +59,7 @@ end
 
 Then /^I should get a response$/ do
   @response.should_not == nil
+  puts @response
 end
 
 Then /^I should see some items$/ do
@@ -63,7 +77,7 @@ Then /^I should see some text$/ do
 end
 
 Then /^I should see some tags$/ do
-  tags = get_tags_from_json @response
+  tags = get_tag_from_json @response
   tags.should_not != nil
 end
 

@@ -26,19 +26,26 @@ C_URI = URI.parse('http://api.opencalais.com/enlighten/rest/')
     h
   end
   
-  def get_tags_from_json(response)
+  def get_tag_from_json(response)
     result = JSON.parse response
     result.delete_if {|key, value| key == "doc" } # ditching the doc
-    result.each{ |key,value| 
-      value.each {|internal_key, internal_value|
-        value.delete_if {|k, v| k == "relevance" } # ditching the relevance score
-        puts "#{internal_key} #{internal_value.class} #{internal_value}" unless internal_value.class == Array
-      }
-      break
-    }
+    result.each do |key,tag| 
+      tag = clean_unwanted_items_from_hash tag
+      yield tag
+    end
     result
   end
 
+  #jkl doesn't work with these aspects of the calais response, also removing blanks
+  def clean_unwanted_items_from_hash h
+    h.delete_if {|k, v| k == "relevance" }
+    h.delete_if {|k, v| k == "instances" }
+    h.delete_if {|k,v| v == "N/A"}
+    h.delete_if {|k,v| v == []}
+    h.delete_if {|k,v| v == ""}
+    h
+  end
+  
   private
 
   def paramsXML(format)

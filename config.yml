@@ -2,3 +2,7 @@ topix:
     http://www.topix.net/rss/search/article?x=0&y=0&q=
 twitter:
     http://search.twitter.com/trends.json
+testdb:
+    http://127.0.0.1:5984/test-db
+realdb:
+    http://127.0.0.1:5984/real-db

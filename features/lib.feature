@@ -34,6 +34,13 @@ Feature: Library features
 
   Scenario: Using a Mock JSON response, parse Calais output
 	#http://www.thegolfchannel.com/tour-insider/peter-hanson-qualifies-open-hole-in-one-29471/
-	Given I have some Mock JSON
-	When I call my calais lib
+	Given I have a Mock Calais response
+	When I parse this response
 	Then I should get a response
+	
+  Scenario: Persist some mock tags
+	Given I have a Mock Calais response
+	When I parse this response
+	Then the tags should be persisted
+	
+	
