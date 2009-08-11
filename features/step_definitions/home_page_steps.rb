@@ -1,4 +1,3 @@
-require 'webrat'
 
 Given "i surf to '$url'" do |url|
   visit url
