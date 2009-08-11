@@ -1,5 +1,5 @@
 Feature: Homepage
-  In order to start viewing the gladrags
+  In order to use the app
   As a user
   I want to hit the homepage and see some initial trends
 

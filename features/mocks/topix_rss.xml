@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet href="/static/rss.3.xsl" type="text/xsl"?>
+<rss xmlns:topix="http://www.topix.com/partners/rsscomment/" xmlns:georss="http://www.georss.org/georss" version="2.0">
+	<channel>
+		<title>Search for "london" </title>
+		<link>http://www.topix.com/search/article?q=london&amp;x=0&amp;y=0</link>
+		<topix:rsslink>http://www.topix.com/rss/search/article.xml?q=london&amp;x=0&amp;y=0</topix:rsslink>
+		<description>News continually updated from thousands of sources across the web</description>
+		<language>en-us</language>
+		<ttl>240</ttl>
+		<copyright>Copyright 2008, Topix</copyright>
+		<image>
+			<title>Topix</title>
+			<link>http://www.topix.com/</link>
+			<url>http://topix.cachefly.net/pics/topix_homepage_logo2.png</url>
+		</image>
+		<item>
+			<title>Major Michael Jackson tribute planned for Vienna</title>
+			<link>http://www.localnews8.com/Global/story.asp?S=10876507</link>
+			<description><![CDATA[The King of Pop will get a royal send-off next month in Vienna. Events promoter World Awards Media GmbH confirmed Monday that members of Michael Jackson's family and a "high-profile lineup of international stars" are planning a tribute concert in the Austrian capital.]]></description>
+			<source>KIFI</source>
+			<pubDate>Mon, 10 Aug 2009 15:21:58 GMT</pubDate>
+			<category>Jermaine Jackson</category>
+			<category>Michael Jackson</category>
+			<category>Pop/Rock</category>
+			<category>Black Entertainment</category>
+			<category>R-N-B</category>
+			<guid isPermaLink="false">C39RO2C8Q8NQR825</guid>
+		</item>
+		<item>
+			<title>LATEST: Man stabbed to death with machete in pub garden</title>
+			<link>http://www.thisislondon.co.uk/standard/article-23730262-details/LATEST%3A+Man+stabbed+to+death+with+machete+in+pub+garden/article.do</link>
+			<description><![CDATA[A man drinking with his girlfriend in a beer garden was hacked to death with machetes in front of horrified drinkers.]]></description>
+			<source>This is London</source>
+			<pubDate>Mon, 10 Aug 2009 15:21:51 GMT</pubDate>
+			<category>Greater London County, England</category>
+			<category>Cheshire County, England</category>
+			<category>England, United Kingdom</category>
+			<category>United Kingdom</category>
+			<category>Sutton, England</category>
+			<category>London, England</category>
+			<category>World News</category>
+			<category>Essex County, England</category>
+			<guid isPermaLink="false">KN03NCSH3KIVG416</guid>
+		</item>
+	</channel>
+</rss>
