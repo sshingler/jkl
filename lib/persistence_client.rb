@@ -15,7 +15,6 @@ module Jkl
     
     def get(id)
       @db.get(id)
-      puts @db.methods
     end
 
     def destroy

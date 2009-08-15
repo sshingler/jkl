@@ -7,7 +7,8 @@ When /^I post some data to yahoo$/ do
 end
 
 When /^I request some RSS$/ do
-  url = "#{YAML::load_file('config.yml')['topix']}iraq"
+  keyphrase = @keyphrase || "iraq"
+  url = "#{YAML::load_file('config.yml')['topix']}#{CGI::escape(keyphrase)}"
   @response = get_from_as_xml url
 end
 
@@ -26,15 +27,21 @@ Then /^I should get a response$/ do
   #puts @response
 end
 
-Then /^I should see some items$/ do
+Then /^I should receive some headlines$/ do
   @items = get_items_from @response
-  puts @items
   @links = []
   @items.each do |item|
     @links << attribute_from(item, :link)
   end
   @links.should_not == nil
   @links.length.should > 0
+end
+
+Then /^I should be able to get the copy from the first headline$/ do
+  @response = get_from @links[0]
+  @response.should_not be_nil
+  @response.should_not == ""
+  @text = sanitize @response
 end
 
 Then /^I should see some text$/ do

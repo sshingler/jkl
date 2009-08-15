@@ -1,4 +1,4 @@
-Given "I have '$text'" do |text|
+Given "I have a keyphrase '$text'" do |text|
   @text = text
 end
 
@@ -7,11 +7,12 @@ Given /^I have a sample BBC story$/ do
 end
 
 When /^I sanitize this text$/ do
-  @text = sanitize_text(@text)
+  @text = sanitize @text
 end
 
 Then /^it should be ok$/ do
   @text.should_not be_nil
+  @text.should_not == ""
 end
 
 ############### pending steps below ################
@@ -32,7 +33,6 @@ end
 
 When /^I get some news stories from the first keyword$/ do
   search_term = @trend['name'].gsub('#','') #removing hash from start of trend name
-  puts  search_term
   search_term = 'london'
   url = "#{YAML::load_file('config.yml')['topix']}#{search_term}"
   rss_response = get_from_as_xml url
@@ -41,7 +41,6 @@ When /^I get some news stories from the first keyword$/ do
   items.each do |item|
     links << attribute_from(item, :link)
   end
-  puts links[0]
-  @story = sanitize_text from_doc get_from links[0]
+  @story = sanitize from_doc get_from links[0]
 end
 

@@ -18,8 +18,8 @@ Feature: http features
   Scenario: Get some RSS
     When I request some RSS
 	Then I should get a response
-    And I should see some items
+    And I should receive some headlines
 
   Scenario: Work with RSS
     Given I have some RSS
-	Then I should see some items
+	Then I should receive some headlines

@@ -9,7 +9,7 @@ Given /^I have a sanitized sample BBC story$/ do
 end
 
 Given /^I have a mock calais response$/ do
-  @json = File.open('features/mocks/calais.json','r') {|f| f.readlines.to_s}
+  @response = File.open('features/mocks/calais.json','r') {|f| f.readlines.to_s}
 end
 
 When /^I post to calais$/ do
@@ -17,13 +17,23 @@ When /^I post to calais$/ do
 end
 
 When /^I remove the unwanted items$/ do
-  @processed_json = clean_unwanted_items_from_hash(JSON.parse(@json))
+  @processed_json = clean_unwanted_items_from_hash(JSON.parse(@response))
 end
 
 Then /^there should no longer be any "([^\"]*)"$/ do |arg1|
   @processed_json[arg1].should be_nil
 end
 
-Then /^I should see some tags$/ do
-  get_tag_from_json(@response) {|tag| tag.should_not be_nil}
+Then /^I should receive some tags$/ do
+  get_tag_from_json(@response) do |tag| 
+    tag.should_not be_nil
+  end
+end
+
+Then /^there should be some "([^\"]*)" tags$/ do |arg1|
+  get_tag_from_json(@response) {|tag|
+    #puts tag.inspect
+    tag.each{|k,v| puts "#{k} : #{v}" if k=='_type'}
+    puts ""
+  }
 end

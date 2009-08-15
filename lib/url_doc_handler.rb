@@ -3,7 +3,7 @@ require 'rest_client'
 
 module Jkl
   
-  def sanitize_text(text)
+  def sanitize(text)
     str = ""
     text.to_s.gsub(/<\/?[^>]*>/, "").split("\r").each do |l| # remove tags
       l = l.chomp.gsub("\t",'').gsub(/\s{2,}/,'') # remove tabs and larger spaces

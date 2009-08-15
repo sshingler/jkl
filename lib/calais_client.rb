@@ -11,21 +11,6 @@ C_URI = URI.parse('http://api.opencalais.com/enlighten/rest/')
     post_to(C_URI, post_args)
   end
   
-  def get_tags_from_rdf(response)
-    h = {}
-    index1 = response.index('terms of service.-->')
-    index1 = response.index('<!--', index1)
-    index2 = response.index('-->', index1)
-    txt = response[index1+4..index2-1]
-    lines = txt.split("\n")
-    lines.each {|line|
-      index = line.index(":")
-      #TODO refactor out into descriptive methods
-      h[line[0...index]] = line[index+1..-1].split(',').collect {|x| x.strip} if index
-    }
-    h
-  end
-  
   def get_tag_from_json(response)
     result = JSON.parse response
     result.delete_if {|key, value| key == "doc" } # ditching the doc
