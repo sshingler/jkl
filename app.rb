@@ -3,11 +3,9 @@ require 'sinatra'
 require 'hpricot'
 require 'json'
 require 'cgi'
+require 'haml'
 
-require 'lib/rest_client.rb'
-require 'lib/rss_client.rb'
-require 'lib/calais_client.rb'
-require 'lib/url_doc_handler.rb'
+require 'lib/jkl_client.rb'
 
 include Jkl
 
@@ -18,14 +16,30 @@ get '/' do
   haml :index
 end
 
-get '/feed/:tag' do |tag|
-    rss = get_from_as_xml "#{YAML::load_file('config.yml')['topix']}#{CGI::escape(tag)}"
-    items = get_items_from rss
-    @descriptions = ""
-    items.each{|item| @descriptions << attribute_from(item, :description).gsub("<![CDATA[",'').gsub("]]>",'')}
-    cal_response = get_from_calais @descriptions
-    @tags = get_tags_from_rdf(cal_response)
-    haml :feed
+get '/tags/:keyphrase' do |keyphrase|
+  puts "keyphrase: #{keyphrase}"
+  
+  @tags = process(keyphrase)
+  haml :feed
+end
+
+post '/tags' do
+  keyphrase = params[:keyphrase]
+  @tags = tags pages headlines keyphrase
+  puts @tags.class
+  haml :feed
+end
+
+get '/mock' do
+  cal_response = File.open('features/mocks/calais.json','r') {|f| f.readlines.to_s}
+  @tags = []
+  @tags = get_tag_from_json(cal_response)
+  @tags.each{|tag| 
+    puts tag.inspect
+    tag.each{|k,v| puts "#{k} : #{v}"}
+    puts ""
+  }
+  haml :feed
 end
 
 not_found do

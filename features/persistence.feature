@@ -3,6 +3,7 @@ Feature: persistence features
   As a developer
   I want to make some requests and inspect some responses
 
+  @couchdb_needed
   Scenario: add a document
     When I persist a document
     Then I should get a response

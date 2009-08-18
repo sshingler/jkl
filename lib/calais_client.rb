@@ -16,7 +16,9 @@ C_URI = URI.parse('http://api.opencalais.com/enlighten/rest/')
     result.delete_if {|key, value| key == "doc" } # ditching the doc
     result.each do |key,tag| 
       tag = clean_unwanted_items_from_hash tag
-      yield tag
+      if block_given?
+        yield tag
+      end
     end
     result
   end

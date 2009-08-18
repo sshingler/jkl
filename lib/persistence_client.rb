@@ -3,6 +3,9 @@ require 'rbconfig'
 
 module Jkl
   
+  SERVER = CouchRest.new
+  SERVER.default_database = 'couchrest-extendeddoc-example'
+  
   class PersistenceClient
   
     def initialize(db)
@@ -21,6 +24,14 @@ module Jkl
       @db.delete! rescue nil
     end
 
+  end
+  
+  class Trend < CouchRest::ExtendedDocument
+    
+    use_database SERVER.default_database
+    property :name
+    timestamps!
+    
   end
   
 end

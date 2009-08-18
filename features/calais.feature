@@ -31,3 +31,8 @@ Feature: Calais-Specific features
 	When I remove the unwanted items
 	Then I should receive some tags
 	And there should be some "Organization" tags
+	
+  Scenario: Go through the calais response tags as a single array
+	Given I have a mock calais response
+	Then I should be able to see the whole lot of tags as one block	
+	
