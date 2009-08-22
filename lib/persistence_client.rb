@@ -1,37 +1,20 @@
 require 'couchrest'
-require 'rbconfig'
 
 module Jkl
   
-  SERVER = CouchRest.new
-  SERVER.default_database = 'couchrest-extendeddoc-example'
+  SERVER = CouchRest.database! YAML::load_file('config.yml')['db']
   
-  class PersistenceClient
-  
-    def initialize(db)
-      @db = CouchRest.database!(db)
-    end
-    
-    def persist(json)
-      @db.save_doc(json)
-    end
-    
-    def get(id)
-      @db.get(id)
-    end
-
-    def destroy
-      @db.delete! rescue nil
-    end
-
+  def delete_db
+    SERVER.delete! rescue nil
   end
   
   class Trend < CouchRest::ExtendedDocument
     
-    use_database SERVER.default_database
+    use_database SERVER
     property :name
+    view_by :name
     timestamps!
-    
+  
   end
   
 end

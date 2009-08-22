@@ -15,6 +15,8 @@ require 'spec/expectations'
 require 'rack/test'
 require 'webrat'
 
+set :environment, :test
+
 Webrat.configure do |config|
   config.mode = :rack
 end

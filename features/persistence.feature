@@ -4,6 +4,7 @@ Feature: persistence features
   I want to make some requests and inspect some responses
 
   @couchdb_needed
-  Scenario: add a document
-    When I persist a document
-    Then I should get a response
+  Scenario: add a Trend
+    When I persist a Trend "london restaurants"
+    Then I should be able to view that Trend
+
