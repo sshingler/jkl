@@ -18,7 +18,6 @@ end
 
 get '/tags/:keyphrase' do |keyphrase|
   puts "keyphrase: #{keyphrase}"
-  
   @tags = process(keyphrase)
   haml :feed
 end
@@ -28,6 +27,12 @@ post '/tags' do
   @tags = tags pages headlines keyphrase
   puts @tags.class
   haml :feed
+end
+
+get '/mock_home' do 
+  output = JSON.parse File.open('features/mocks/twitter.json','r') {|f| f.readlines.to_s}
+  @trends = output['trends']
+  haml :index
 end
 
 get '/mock' do
