@@ -2,6 +2,6 @@
   %p here's the metadata for that tag:
   %ul.tags
     - @tags.each do |tag|
-      - tag.each do |n,v|
-        %li 
-          == #{n} #{v}
+      %li
+        - tag.each do |k,v|
+          == #{v}

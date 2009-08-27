@@ -12,7 +12,9 @@ module Jkl
   def pages(headlines)
     items = get_items_from headlines
     descriptions = ""
-    items.each{|item| descriptions << attribute_from(item, :description).gsub("<![CDATA[",'').gsub("]]>",'')}
+    items.each do |item| 
+      descriptions << attribute_from(item, :description).gsub("<![CDATA[",'').gsub("]]>",'')
+    end
     descriptions
   end
 

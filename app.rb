@@ -17,15 +17,21 @@ get '/' do
 end
 
 get '/tags/:keyphrase' do |keyphrase|
-  puts "keyphrase: #{keyphrase}"
-  @tags = process(keyphrase)
+  @tags = tags pages headlines keyphrase
+  @tags.each{|tag| 
+    puts ""
+    puts tag.inspect
+  }
   haml :feed
 end
 
 post '/tags' do
   keyphrase = params[:keyphrase]
   @tags = tags pages headlines keyphrase
-  puts @tags.class
+  @tags.each{|tag| 
+    puts ""
+    puts tag.inspect
+  }
   haml :feed
 end
 
@@ -40,9 +46,8 @@ get '/mock' do
   @tags = []
   @tags = get_tag_from_json(cal_response)
   @tags.each{|tag| 
-    puts tag.inspect
-    tag.each{|k,v| puts "#{k} : #{v}"}
     puts ""
+    puts tag.inspect
   }
   haml :feed
 end
