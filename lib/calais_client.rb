@@ -7,20 +7,21 @@ LICENSE_ID = YAML::load_file('keys.yml')['calais']
 C_URI = URI.parse('http://api.opencalais.com/enlighten/rest/')
 
   def get_from_calais(content)  
-    post_args = { 'licenseID' => LICENSE_ID, 'content' => content, 'paramsXML' => paramsXML('application/json') }
+    post_args = { 'licenseID' => LICENSE_ID, 'content' => content, 
+                  'paramsXML' => paramsXML('application/json') }
     post_to(C_URI, post_args)
   end
   
   def get_tag_from_json(response)
     result = JSON.parse response
     result.delete_if {|key, value| key == "doc" } # ditching the doc
+    cleaned_result = []
     result.each do |key,tag| 
       tag = clean_unwanted_items_from_hash tag
-      if block_given?
-        yield tag
-      end
+      cleaned_result << tag
+      yield tag if block_given?
     end
-    result
+    cleaned_result
   end
 
   #jkl doesn't work with these aspects of the calais response, also removing blanks
