@@ -1,7 +1,7 @@
 # See http://wiki.github.com/aslakhellesoy/cucumber/sinatra
 # for more details about Sinatra with Cucumber
 
-gem 'rack-test', '=0.3.0'
+gem 'rack-test', '>=0.3.0'
 gem 'aslakhellesoy-webrat', '=0.4.4.1'
 gem 'sinatra', '=0.9.4'
 
