@@ -34,6 +34,11 @@ Then /^there should be some "([^\"]*)" tags$/ do |arg1|
   get_tag_from_json(@response) {|tag|
     #puts tag.inspect
     tag.each{|k,v| puts "#{k} : #{v}" if k=='_type'}
-    puts ""
   }
 end
+
+Then /^I should be able to see the whole lot of tags as one block$/ do
+  tags = get_tag_from_json(@response)
+  tags.length.should > 0
+end
+

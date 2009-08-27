@@ -3,6 +3,8 @@ Feature: persistence features
   As a developer
   I want to make some requests and inspect some responses
 
-  Scenario: add a document
-    When I persist a document
-    Then I should get a response
+  @couchdb_needed
+  Scenario: add a Trend
+    When I persist a Trend "london restaurants"
+    Then I should be able to view that Trend
+

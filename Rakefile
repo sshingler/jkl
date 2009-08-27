@@ -1,8 +1,8 @@
 require 'rubygems'
-require 'spec/rake/spectask'
+require 'cucumber'
 require 'cucumber/rake/task'
 
-#task features
-Cucumber::Rake::Task.new do |t|
-  t.cucumber_opts = "--format pretty"
+Cucumber::Rake::Task.new(:features) do |t|
+  t.cucumber_opts = "features --format pretty --tags ~connection_needed"
+  t.rcov = true
 end
