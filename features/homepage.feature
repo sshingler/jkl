@@ -15,6 +15,6 @@ Feature: Homepage
 
   @acceptance	
   Scenario: use a mock calais response to layout the page
-	When I surf to '/mock'
+	When I surf to "/mock"
 	Then I should see some stuff
 	
