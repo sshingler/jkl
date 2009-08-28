@@ -21,16 +21,37 @@ C_URI = URI.parse('http://api.opencalais.com/enlighten/rest/')
       cleaned_result << tag
       yield tag if block_given?
     end
+
     cleaned_result
   end
+
+  def get_pp_tag_from_json(response)
+    result = JSON.parse response
+    result.delete_if {|key, value| key == "doc" } # ditching the doc
+    cleaned_result = {}
+    result.each do |key, tag| 
+      tag = clean_unwanted_items_from_hash tag
+      yield tag if block_given?
+      
+      tag.each do |t_key, t_val|
+        cleaned_result[t_key] ||= []
+        r_val = cleaned_result[ t_key ]
+        r_val << t_val
+      end
+    end
+
+    cleaned_result
+  end
+
 
   #jkl doesn't work with these aspects of the calais response, also removing blanks
   def clean_unwanted_items_from_hash h
     h.delete_if {|k, v| k == "relevance" }
     h.delete_if {|k, v| k == "instances" }
-    h.delete_if {|k,v| v == "N/A"}
-    h.delete_if {|k,v| v == []}
-    h.delete_if {|k,v| v == ""}
+    h.delete_if {|k, v| v == "N/A"}
+    h.delete_if {|k, v| v == []}
+    h.delete_if {|k, v| v == ""}
+    h.delete_if {|k, v| k == "_typeGroup"}
     h
   end
   

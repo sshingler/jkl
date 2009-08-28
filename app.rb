@@ -21,6 +21,7 @@ get '/tags/:keyphrase' do |keyphrase|
     puts ""
     puts tag.inspect
   }
+
   haml :feed
 end
 
@@ -48,6 +49,17 @@ get '/mock' do
     puts ""
     puts tag.inspect
   }
+  haml :feed
+end
+
+get '/mock_pp' do
+  cal_response = File.open('features/mocks/calais.json','r') {|f| f.readlines.to_s}
+  @tags = []
+  @tags = get_pp_tag_from_json(cal_response)
+#  @tags.each{|tag| 
+#    puts ""
+#    puts tag.inspect
+#  }
   haml :feed
 end
 

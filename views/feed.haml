@@ -1,7 +1,8 @@
 .header 
   %p here's the metadata for that tag:
-  %ul.tags
-    - @tags.each do |tag|
-      %li
-        - tag.each do |k,v|
-          == #{v}
+  - @tags.each do |key, value|
+    %div{ :id => key }
+      == #{key}
+      %ul
+        - value.each do |k, v|
+          %li #{k}
