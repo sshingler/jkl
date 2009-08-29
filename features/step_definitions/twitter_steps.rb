@@ -3,7 +3,7 @@ Given /^I have a mock twitter response$/ do
 end
 
 When /^I request trends data from twitter$/ do
-  @url = YAML::load_file('config.yml')['twitter']
+  @url = YAML::load_file('config/config.yml')['twitter']
   @response = get_from @url
 end
 

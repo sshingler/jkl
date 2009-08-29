@@ -6,7 +6,7 @@ require 'lib/url_doc_handler.rb'
 module Jkl
   
   def headlines(keyphrase)
-    get_from_as_xml "#{YAML::load_file('config.yml')['topix']}#{CGI::escape(keyphrase)}"
+    get_from_as_xml "#{YAML::load_file('config/config.yml')['topix']}#{CGI::escape(keyphrase)}"
   end
 
   def pages(headlines)

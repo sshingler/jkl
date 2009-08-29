@@ -11,14 +11,14 @@ end
 
 When /^I request stories from Topix$/ do 
   search_term = 'london'
-  url = "#{YAML::load_file('config.yml')['topix']}#{search_term}"
+  url = "#{YAML::load_file('config/config.yml')['topix']}#{search_term}"
   @response = get_from_as_xml url
 end
 
 When /^I get some news stories from the first keyword$/ do
   search_term = @trend['name'].gsub('#','') #removing hash from start of trend name
   search_term = 'london'
-  url = "#{YAML::load_file('config.yml')['topix']}#{search_term}"
+  url = "#{YAML::load_file('config/config.yml')['topix']}#{search_term}"
   rss_response = get_from_as_xml url
   items = get_items_from rss_response
   links = []

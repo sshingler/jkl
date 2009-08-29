@@ -1,6 +1,6 @@
 When /^I post some data to yahoo$/ do
   @url = URI.parse('http://search.yahooapis.com/ContentAnalysisService/V1/termExtraction')
-  appid = LICENSE_ID = YAML::load_file('keys.yml')['yahoo']
+  appid = LICENSE_ID = YAML::load_file('config/keys.yml')['yahoo']
   context = URI.encode('Italian sculptors and painters of the renaissance favored the Virgin Mary for inspiration')
   post_args = { 'appid' => appid, 'context' => context, 'output' => 'json' }
   @response = post_to @url, post_args
@@ -8,7 +8,7 @@ end
 
 When /^I request some RSS$/ do
   keyphrase = @keyphrase || "iraq"
-  url = "#{YAML::load_file('config.yml')['topix']}#{CGI::escape(keyphrase)}"
+  url = "#{YAML::load_file('config/config.yml')['topix']}#{CGI::escape(keyphrase)}"
   @response = get_from_as_xml url
 end
 

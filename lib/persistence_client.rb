@@ -2,7 +2,7 @@ require 'couchrest'
 
 module Jkl
   
-  SERVER = CouchRest.database! YAML::load_file('config.yml')['db']
+  SERVER = CouchRest.database! YAML::load_file('config/config.yml')['db']
   
   def delete_db
     SERVER.delete! rescue nil

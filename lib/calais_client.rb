@@ -3,7 +3,7 @@ require 'lib/rest_client'
 
 module Jkl
 
-LICENSE_ID = YAML::load_file('keys.yml')['calais']
+LICENSE_ID = YAML::load_file('config/keys.yml')['calais']
 C_URI = URI.parse('http://api.opencalais.com/enlighten/rest/')
 
   def get_from_calais(content)  
