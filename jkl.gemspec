@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{jkl}
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ['steven shingler', 'richard vaughan']
@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency("haml", ">=2.2.2")
   s.add_dependency("hpricot", ">= 0.8.1")
   s.add_dependency("json", ">=1.1.7")
-  s.add_dependency("restclient", ">=1.0.3")
+  s.add_dependency("rest-client", ">=1.0.3")
   s.add_dependency("webrat", ">=0.4.4")
 
 end
