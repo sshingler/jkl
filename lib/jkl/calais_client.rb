@@ -1,5 +1,5 @@
 require 'json'
-require 'lib/rest_client'
+require 'lib/jkl/rest_client'
 
 module Jkl
 

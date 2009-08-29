@@ -5,7 +5,7 @@ require 'json'
 require 'cgi'
 require 'haml'
 
-require 'lib/jkl_client.rb'
+require 'lib/jkl.rb'
 
 include Jkl
 
