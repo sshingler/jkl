@@ -20,6 +20,11 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.4}
   s.summary = s.description
 
-  #s.add_dependency("dependency", ">= 0.x.x")
-  
+  s.add_dependency("couchrest", ">=0.33")
+  s.add_dependency("haml", ">=2.2.2")
+  s.add_dependency("hpricot", ">= 0.8.1")
+  s.add_dependency("json", ">=1.1.7")
+  s.add_dependency("restclient", ">=1.0.3")
+  s.add_dependency("webrat", ">=0.4.4")
+
 end
