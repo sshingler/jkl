@@ -2,15 +2,15 @@
 
 Gem::Specification.new do |s|
   s.name = %q{jkl}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  #s.authors = []
+  s.authors = ['steven shingler', 'richard vaughan']
   s.date = %q{2009-08-27}
   s.description = %q{Jkl is a Ruby library and Sinatra app for dealing with information overload.}
-  #s.email = %q{}
+  s.email = %q{'shingler@gmail.com'}
   s.extra_rdoc_files = ["README", "License.txt"]
-  s.files = Dir.glob("{lib}/**/*")
+  s.files = ["lib/calais_client.rb","lib/jkl_client.rb", "lib/persistence_client.rb", "lib/rest_client.rb", "lib/rss_client.rb", "lib/url_doc_handler.rb"]
   #s.test_files = FileList["{test}/**/*test.rb"].to_a
   s.has_rdoc = false
   s.homepage = %q{http://github.com/sshingler/jkl}
