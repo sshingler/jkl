@@ -17,7 +17,28 @@ Gem::Specification.new do |s|
             "lib/jkl/persistence_client.rb", 
             "lib/jkl/rest_client.rb", 
             "lib/jkl/rss_client.rb", 
-            "lib/jkl/url_doc_handler.rb"]
+            "lib/jkl/url_doc_handler.rb",
+            "features/calais.feature",
+            "features/homepage.feature",
+            "features/http.feature",
+            "features/persistence.feature",
+            "features/processing.feature",
+            "features/sanitize-text.feature",
+            "features/twitter.feature",
+            "features/mocks/bbc_story.html",
+            "features/mocks/calais.json",
+            "features/mocks/topix_rss.xml",
+            "features/mocks/twitter.json",
+            "features/step_definitions/calais_steps.rb",
+            "features/step_definitions/home_page_steps.rb",
+            "features/step_definitions/http_steps.rb",
+            "features/step_definitions/persistence_steps.rb",
+            "features/step_definitions/processing_steps.rb",
+            "features/step_definitions/require_steps.rb",
+            "features/step_definitions/sanitize-text_steps.rb",
+            "features/step_definitions/twitter_steps.rb",
+            "features/support/env.rb"
+            ]
   #s.test_files = FileList["{test}/**/*test.rb"].to_a
   s.has_rdoc = false
   s.homepage = %q{http://github.com/sshingler/jkl}
@@ -26,7 +47,5 @@ Gem::Specification.new do |s|
   #s.rubyforge_project = %q{grit}
   s.rubygems_version = %q{1.3.4}
   s.summary = s.description
-
-
 
 end
