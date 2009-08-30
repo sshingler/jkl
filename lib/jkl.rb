@@ -1,3 +1,4 @@
+require 'cgi'
 require 'lib/jkl/rest_client.rb'
 require 'lib/jkl/rss_client.rb'
 require 'lib/jkl/calais_client.rb'

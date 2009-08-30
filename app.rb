@@ -2,7 +2,6 @@ require 'rubygems'
 require 'sinatra'
 require 'hpricot'
 require 'json'
-require 'cgi'
 require 'haml'
 
 require 'lib/jkl.rb'
@@ -10,7 +9,7 @@ require 'lib/jkl.rb'
 include Jkl
 
 get '/' do
-  twitter_json_url = YAML::load_file('config.yml')['twitter'] 
+  twitter_json_url = YAML::load_file('config/config.yml')['twitter'] 
   output = JSON.parse get_from  twitter_json_url
   @trends = output['trends']
   haml :index
