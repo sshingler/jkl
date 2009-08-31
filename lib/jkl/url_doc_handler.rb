@@ -1,5 +1,5 @@
 require 'hpricot'
-require 'lib/jkl/rest_client'
+require 'rest_client'
 
 module Jkl
   
