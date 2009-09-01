@@ -21,7 +21,7 @@ module Jkl
 
   def tags(pages)
     cal_response = get_from_calais(pages)
-    get_tag_from_json(cal_response)
+    get_calais_metadata(cal_response)
   end
   
 end

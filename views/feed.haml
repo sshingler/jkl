@@ -1,8 +1,8 @@
 .header 
-  %p here's the metadata for that tag:
-  - @tags.each do |key, value|
-    %div{ :id => key }
-      == #{key}
+
+  - @json_obj['results'].each do |k, v|
+    %p 
+      #{k}
       %ul
-        - value.each do |k, v|
-          %li #{k}
+        - v.each do |x|
+          %li #{x}

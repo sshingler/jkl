@@ -17,21 +17,18 @@ end
 
 get '/tags/:keyphrase' do |keyphrase|
   @tags = tags pages headlines keyphrase
-  @tags.each{|tag| 
-    puts ""
-    puts tag.inspect
-  }
-
+  
+  @json_obj = JSON.parse( @tags )
+  
   haml :feed
 end
 
 post '/tags' do
   keyphrase = params[:keyphrase]
   @tags = tags pages headlines keyphrase
-  @tags.each{|tag| 
-    puts ""
-    puts tag.inspect
-  }
+
+  @json_obj = JSON.parse( @tags )
+
   haml :feed
 end
 
