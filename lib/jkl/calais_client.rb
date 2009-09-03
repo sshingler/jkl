@@ -1,5 +1,6 @@
 require 'json'
 require 'rest_client'
+require 'calais-utils'
 
 module Jkl
 
@@ -21,16 +22,24 @@ C_URI = URI.parse('http://api.opencalais.com/enlighten/rest/')
       cleaned_result << tag
       yield tag if block_given?
     end
+
     cleaned_result
   end
+
+  def get_calais_metadata(response)
+      ce = CalaisExtractor.new( response )
+      ce.prettify
+  end
+
 
   #jkl doesn't work with these aspects of the calais response, also removing blanks
   def clean_unwanted_items_from_hash h
     h.delete_if {|k, v| k == "relevance" }
     h.delete_if {|k, v| k == "instances" }
-    h.delete_if {|k,v| v == "N/A"}
-    h.delete_if {|k,v| v == []}
-    h.delete_if {|k,v| v == ""}
+    h.delete_if {|k, v| v == "N/A"}
+    h.delete_if {|k, v| v == []}
+    h.delete_if {|k, v| v == ""}
+    h.delete_if {|k, v| k == "_typeGroup"}
     h
   end
   

@@ -17,20 +17,18 @@ end
 
 get '/tags/:keyphrase' do |keyphrase|
   @tags = tags pages headlines keyphrase
-  @tags.each{|tag| 
-    puts ""
-    puts tag.inspect
-  }
+  
+  @json_obj = JSON.parse( @tags )
+  
   haml :feed
 end
 
 post '/tags' do
   keyphrase = params[:keyphrase]
   @tags = tags pages headlines keyphrase
-  @tags.each{|tag| 
-    puts ""
-    puts tag.inspect
-  }
+
+  @json_obj = JSON.parse( @tags )
+
   haml :feed
 end
 
@@ -48,6 +46,17 @@ get '/mock' do
     puts ""
     puts tag.inspect
   }
+  haml :feed
+end
+
+get '/mock_pp' do
+  cal_response = File.open('features/mocks/calais.json','r') {|f| f.readlines.to_s}
+  @tags = []
+  @tags = get_pp_tag_from_json(cal_response)
+#  @tags.each{|tag| 
+#    puts ""
+#    puts tag.inspect
+#  }
   haml :feed
 end
 

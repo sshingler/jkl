@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{jkl}
-  s.version = "0.0.5"
+  s.version = "0.0.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ['steven shingler', 'richard vaughan']
@@ -47,5 +47,7 @@ Gem::Specification.new do |s|
   #s.rubyforge_project = %q{grit}
   s.rubygems_version = %q{1.3.4}
   s.summary = s.description
+  s.add_dependency("leenookx-json-mangler", ">=0.2.6")
+  s.add_dependency("leenookx-calais-utils", ">=0.0.0")
 
 end

@@ -1,7 +1,8 @@
 .header 
-  %p here's the metadata for that tag:
-  %ul.tags
-    - @tags.each do |tag|
-      %li
-        - tag.each do |k,v|
-          == #{v}
+
+  - @json_obj['results'].each do |k, v|
+    %p 
+      #{k}
+      %ul
+        - v.each do |x|
+          %li #{x}
