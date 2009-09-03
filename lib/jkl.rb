@@ -1,8 +1,8 @@
 require 'cgi'
-require 'jkl/rest_client.rb'
-require 'jkl/rss_client.rb'
-require 'jkl/calais_client.rb'
-require 'jkl/url_doc_handler.rb'
+require 'lib/jkl/rest_client.rb'
+require 'lib/jkl/rss_client.rb'
+require 'lib/jkl/calais_client.rb'
+require 'lib/jkl/url_doc_handler.rb'
 
 module Jkl
   
