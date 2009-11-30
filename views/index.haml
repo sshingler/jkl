@@ -6,4 +6,4 @@
         %a{:href => '/tags/'+URI.encode(trend['name'].gsub('#',''))}== #{trend['name']}
   %form{:action => '/tags', :method => 'post'}
     %input.keyphrase{:type => 'text', :name => 'keyphrase', :size => '41', :maxlength => '2048', :title => 'keyphrase'}
-    %input.keyphrase{:type => 'submit', :name => 'search', :id => 'search'}
+    %input.search{:type => 'submit', :name => 'search', :id => 'search'}
