@@ -1,6 +1,5 @@
 require 'json'
 require 'rest_client'
-require 'calais-utils'
 
 module Jkl
 
@@ -27,8 +26,9 @@ C_URI = URI.parse('http://api.opencalais.com/enlighten/rest/')
   end
 
   def get_calais_metadata(response)
-      ce = CalaisExtractor.new( response )
-      ce.prettify
+     #ce = CalaisExtractor.new( response )
+     #ce.prettify
+     #TODO work out how to implement this
   end
 
 
