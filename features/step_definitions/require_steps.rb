@@ -2,6 +2,7 @@ require 'hpricot'
 require 'json'
 require 'restclient'
 require 'haml' 
+require 'cgi'
 
 require 'lib/jkl/calais_client.rb'
 require 'lib/jkl/rest_client.rb'
