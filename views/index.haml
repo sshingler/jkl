@@ -1,9 +1,0 @@
-.main
-  %p here are the top twitter trends right now:
-  %ol.tweets
-    - @trends.each do |trend|
-      %li.tweet 
-        %a{:href => '/tags/'+URI.encode(trend['name'].gsub('#',''))}== #{trend['name']}
-  %form{:action => '/tags', :method => 'post'}
-    %input.keyphrase{:type => 'text', :name => 'keyphrase', :size => '41', :maxlength => '2048', :title => 'keyphrase'}
-    %input.search{:type => 'submit', :name => 'search', :id => 'search'}
