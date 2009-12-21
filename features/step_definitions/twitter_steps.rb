@@ -4,7 +4,7 @@ end
 
 When /^I request trends data from twitter$/ do
   @url = YAML::load_file('config/config.yml')['twitter']
-  @response = get_from @url
+  @response = Jkl::get_from @url
 end
 
 Then /^I should see some trends$/ do

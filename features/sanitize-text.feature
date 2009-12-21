@@ -16,13 +16,13 @@ Feature: Processing features
 		When I sanitize this text
 		Then it should say ''
 	
-	@unit @text
+	@unit @text @wip
 		Scenario: Sanitize some text with tabs and spaces
 		Given I have a keyphrase 'the cat sat on 						the mat            '
 		When I sanitize this text
 		Then it should say 'the cat sat on the mat'
 	
-	@unit @text
+	@unit @text @wip
 		Scenario: Sanitize some short text with tabs and spaces
 		Given I have a keyphrase 'the   cat sat on 						           '
 		When I sanitize this text
@@ -40,6 +40,12 @@ Feature: Processing features
 		When I sanitize this text
 		Then it should be ok
 		Then it should say 'the cat sat on the mat'
+		
+	@unit @text @wip
+	Scenario: Remove script tags
+	  Given I have some script tag data
+	  When I sanitize this text
+	  Then it should say ' some para stuff here '
 
 	Scenario: Clean a web page
 		Given I have a sample BBC story

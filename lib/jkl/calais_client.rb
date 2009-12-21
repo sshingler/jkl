@@ -1,23 +1,27 @@
-require 'json'
-require 'rest_client'
+require "json"
+require "rest_client"
+require "calais"
 
 module Jkl
 
-LICENSE_ID = YAML::load_file('config/keys.yml')['calais']
-C_URI = URI.parse('http://api.opencalais.com/enlighten/rest/')
-
-  def get_from_calais(content)  
-    post_args = { 'licenseID' => LICENSE_ID, 'content' => content, 
+  def self.get_from_calais(content)  
+    begin
+      license_id = YAML::load_file('config/keys.yml')['calais']
+      c_uri = URI.parse('http://api.opencalais.com/enlighten/rest/')
+      post_args = { 'licenseID' => license_id, 'content' => content, 
                   'paramsXML' => paramsXML('application/json') }
-    post_to(C_URI, post_args)
+      post_to(c_uri, post_args)
+    rescue Exception => e
+      puts e
+    end
   end
   
-  def get_tag_from_json(response)
+  def self.get_tag_from_json(response)
     result = JSON.parse response
     result.delete_if {|key, value| key == "doc" } # ditching the doc
     cleaned_result = []
     result.each do |key,tag| 
-      tag = clean_unwanted_items_from_hash tag
+      tag = Jkl::clean_unwanted_items_from_hash tag
       cleaned_result << tag
       yield tag if block_given?
     end
@@ -25,15 +29,14 @@ C_URI = URI.parse('http://api.opencalais.com/enlighten/rest/')
     cleaned_result
   end
 
-  def get_calais_metadata(response)
+  def self.get_calais_metadata(response)
      #ce = CalaisExtractor.new( response )
      #ce.prettify
      #TODO work out how to implement this
   end
 
-
   #jkl doesn't work with these aspects of the calais response, also removing blanks
-  def clean_unwanted_items_from_hash h
+  def self.clean_unwanted_items_from_hash h
     h.delete_if {|k, v| k == "relevance" }
     h.delete_if {|k, v| k == "instances" }
     h.delete_if {|k, v| v == "N/A"}
@@ -45,7 +48,7 @@ C_URI = URI.parse('http://api.opencalais.com/enlighten/rest/')
   
   private
 
-  def paramsXML(format)
+  def self.paramsXML(format)
    <<-paramsXML; 
     <c:params xmlns:c="http://s.opencalais.com/1/pred/"
            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">

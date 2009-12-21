@@ -7,7 +7,7 @@ Given /^I have a sample BBC story$/ do
 end
 
 When /^I sanitize this text$/ do
-  @text = sanitize @text
+  @text = Jkl::sanitize @text
 end
 
 Then /^it should be ok$/ do
@@ -18,3 +18,15 @@ end
 Then "it should say '$text'" do |text|
   @text.should == text
 end
+
+Given /^I have some script tag data$/ do
+  @text = <<-EOF;
+  some start stuff here
+  <script type="text/javascript" charset="utf-8">
+   function nofunction(){var bob;}
+  </script>
+  <p> some para stuff here </p>
+  some end stuff here
+    EOF
+end
+

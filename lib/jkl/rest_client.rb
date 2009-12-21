@@ -3,7 +3,7 @@ require 'hpricot'
 
 module Jkl
   
-  def post_to(uri, post_args)
+  def self.post_to(uri, post_args)
     begin
       resp, data = Net::HTTP.post_form(uri, post_args)
       data
@@ -16,7 +16,7 @@ module Jkl
     end
   end
   
-  def get_from(uri)
+  def self.get_from(uri)
     begin
       res = Net::HTTP.get_response(URI.parse(uri))
       res.body
@@ -29,7 +29,7 @@ module Jkl
     end
   end
   
-  def get_from_as_xml(uri)
+  def self.get_from_as_xml(uri)
     Hpricot.XML get_from uri
   end
   
