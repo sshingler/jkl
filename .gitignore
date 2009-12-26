@@ -1,3 +1,4 @@
+*.gem
 keys.yml
 coverage
 webrat.log

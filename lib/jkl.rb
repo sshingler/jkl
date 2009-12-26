@@ -6,8 +6,8 @@ require "jkl/url_doc_handler.rb"
 
 module Jkl
   
-  def self.headlines(keyphrase)
-    get_from_as_xml "#{YAML::load_file("config/config.yml")["topix"]}#{CGI::escape(keyphrase)}"
+  def self.headlines(feed, keyphrase)
+    get_from_as_xml "#{feed}#{keyphrase}"
   end
 
   def self.pages(headlines)
@@ -37,11 +37,11 @@ module Jkl
     links
   end
 
-  def self.tags(pages)
+  def self.tags(key, pages)
     Calais.process_document(
         :content => pages,
         :content_type => :text, 
-        :license_id => YAML::load_file("config/keys.yml")["calais"]
+        :license_id => key
     )
   end
   

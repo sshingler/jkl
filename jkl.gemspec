@@ -1,11 +1,11 @@
 Gem::Specification.new do |s|
-  s.name = %q{jkl}
+  s.name = %q{jakal}
   s.version = "0.0.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ['steven shingler']
+  s.authors = ['sshingler']
   s.date = %q{2009-08-27}
-  s.description = %q{Jkl is a Ruby library for dealing with information overload.}
+  s.description = %q{Jakal is a Ruby library for dealing with information overload.}
   s.email = %q{'shingler@gmail.com'}
   
   s.extra_rdoc_files = ["README.rdoc", "License.txt"]
