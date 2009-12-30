@@ -29,10 +29,11 @@ module Jkl
     cleaned_result
   end
 
-  def self.get_calais_metadata(response)
-     #ce = CalaisExtractor.new( response )
-     #ce.prettify
-     #TODO work out how to implement this
+  def self.get_calais_metadata(key, text)
+    name_value_pairs = Jkl::tags(key, text).entities.map{|e| {e.type => [e.attributes["name"]]}}
+    nested_list = {}
+    name_value_pairs.each { |a| nested_list = nested_list.merge!(a){ |key,v1,v2| v1+v2 }}
+    nested_list
   end
 
   #jkl doesn't work with these aspects of the calais response, also removing blanks

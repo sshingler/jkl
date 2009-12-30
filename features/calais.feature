@@ -17,6 +17,12 @@ Feature: Calais-Specific features
     Then I should get a response
     And I should receive some tags
 
+  @connection_needed
+	Scenario: Get nested tags from calais
+	  Given I have some simple text
+    When I request the nested entities from calais
+    Then I should get a decent response
+      
   Scenario: Clean up blank items from a calais response
   	Given I have a mock calais response
   	When I remove the unwanted items
@@ -35,4 +41,3 @@ Feature: Calais-Specific features
   Scenario: Go through the calais response tags as a single array
   	Given I have a mock calais response
   	Then I should be able to see the whole lot of tags as one block	
-	
