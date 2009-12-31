@@ -3,34 +3,38 @@ require 'hpricot'
 
 module Jkl
   
-  def self.post_to(uri, post_args)
-    begin
-      resp, data = Net::HTTP.post_form(uri, post_args)
-      data
-    rescue  URI::InvalidURIError => e
-      puts("WARN: Invalid URI: #{e}")
-    rescue SocketError => e
-      puts("WARN: Could not connect: #{e}")
-    rescue Errno::ECONNREFUSED  => e
-      puts("WARN: Connection refused: #{e}")
+  class << self
+    
+    def post_to(uri, post_args)
+      begin
+        resp, data = Net::HTTP.post_form(uri, post_args)
+        data
+      rescue  URI::InvalidURIError => e
+        puts("WARN: Invalid URI: #{e}")
+      rescue SocketError => e
+        puts("WARN: Could not connect: #{e}")
+      rescue Errno::ECONNREFUSED  => e
+        puts("WARN: Connection refused: #{e}")
+      end
     end
-  end
   
-  def self.get_from(uri)
-    begin
-      res = Net::HTTP.get_response(URI.parse(uri))
-      res.body
-    rescue  URI::InvalidURIError => e
-      puts("WARN: Invalid URI: #{e}")
-    rescue SocketError => e
-      puts("WARN: Could not connect: #{e}")
-    rescue Errno::ECONNREFUSED  => e
-      puts("WARN: Connection refused: #{e}")
+    def get_from(uri)
+      begin
+        res = Net::HTTP.get_response(URI.parse(uri))
+        res.body
+      rescue  URI::InvalidURIError => e
+        puts("WARN: Invalid URI: #{e}")
+      rescue SocketError => e
+        puts("WARN: Could not connect: #{e}")
+      rescue Errno::ECONNREFUSED  => e
+        puts("WARN: Connection refused: #{e}")
+      end
     end
-  end
   
-  def self.get_from_as_xml(uri)
-    Hpricot.XML get_from uri
-  end
+    def get_from_as_xml(uri)
+      Hpricot.XML get_from uri
+    end
   
+  end
+
 end

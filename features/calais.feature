@@ -21,7 +21,7 @@ Feature: Calais-Specific features
 	Scenario: Get nested tags from calais
 	  Given I have some simple text
     When I request the nested entities from calais
-    Then I should get a decent response
+    Then I should receive the entities grouped into categories
       
   Scenario: Clean up blank items from a calais response
   	Given I have a mock calais response

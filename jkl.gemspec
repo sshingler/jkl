@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{jakal}
-  s.version = "0.0.9"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ['sshingler']
@@ -17,7 +17,6 @@ Gem::Specification.new do |s|
             "lib/jkl/url_doc_handler.rb",
             "features/calais.feature",
             "features/http.feature",
-            "features/processing.feature",
             "features/sanitize-text.feature",
             "features/mocks/bbc_story.html",
             "features/mocks/calais.json",
@@ -25,7 +24,6 @@ Gem::Specification.new do |s|
             "features/mocks/twitter.json",
             "features/step_definitions/calais_steps.rb",
             "features/step_definitions/http_steps.rb",
-            "features/step_definitions/processing_steps.rb",
             "features/step_definitions/require_steps.rb",
             "features/step_definitions/sanitize-text_steps.rb",
             "features/step_definitions/twitter_steps.rb",

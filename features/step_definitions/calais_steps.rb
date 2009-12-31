@@ -44,9 +44,9 @@ end
 
 When /^I request the nested entities from calais$/ do
   key = YAML::load_file('config/keys.yml')['calais']
-  @response = Jkl::get_calais_metadata key, @text
+  @response = Jkl::tags key, @text
 end
 
-Then /^I should get a decent response$/ do
+Then /^I should receive the entities grouped into categories$/ do
   @response.eql?({"Person"=>["Barack Obama", "Hillary Clinton"], "Position"=>["Secretary of State"]}).should == true
 end
