@@ -13,7 +13,8 @@ Given /^I have a mock calais response$/ do
 end
 
 When /^I post to calais$/ do
-  @response = Jkl::get_from_calais @text
+  key = YAML::load_file('config/keys.yml')['calais']
+  @response = Jkl::Extraction::get_from_calais(key, @text)
 end
 
 When /^I remove the unwanted items$/ do
@@ -44,7 +45,7 @@ end
 
 When /^I request the nested entities from calais$/ do
   key = YAML::load_file('config/keys.yml')['calais']
-  @response = Jkl::tags key, @text
+  @response = Jkl::Extraction::tags key, @text
 end
 
 Then /^I should receive the entities grouped into categories$/ do
