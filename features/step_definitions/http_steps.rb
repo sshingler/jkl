@@ -9,7 +9,7 @@ end
 When /^I request some RSS$/ do
   keyphrase = @keyphrase || "iraq"
   url = "#{YAML::load_file('config/config.yml')['topix']}#{CGI::escape(keyphrase)}"
-  @response = Jkl::get_from_as_xml url
+  @response = Jkl::get_xml_from url
 end
 
 Given /^I have some RSS$/ do
@@ -28,17 +28,16 @@ When /^I request some trends$/ do
   @response = output['trends']
 end
 
-
 Then /^I should get a response$/ do
   @response.should_not == nil
   #puts @response.inspect
 end
 
 Then /^I should receive some headlines$/ do
-  @items = Jkl::get_items_from @response
+  @items = Jkl::Rss::items @response
   @links = []
   @items.each do |item|
-    @links << Jkl::attribute_from(item, :link)
+    @links << Jkl::Rss::attribute_from(item, :link)
   end
   @links.should_not == nil
   @links.length.should > 0

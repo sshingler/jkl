@@ -1,19 +1,27 @@
 require 'hpricot'
 
 module Jkl
-  
-  class << self
+  module Rss
+    class << self
 
-    def get_items_from(rssdoc)
-      items = []
-      (rssdoc/:item).each { |rssitem| items.push rssitem } unless rssdoc==nil
-      items
+      def items(rss_doc)
+        (rss_doc/:item)
+      end
+
+      def links(items)
+        items.map{|item| attribute_from(item,:link)}
+      end
+
+      def descriptions(items)
+        items.map do |item| 
+          attribute_from(item, :description).gsub("<![CDATA[","").gsub("]]>","")
+        end
+      end
+
+      def attribute_from(item, name)
+        (item/name).inner_html
+      end
+      
     end
-  
-    def attribute_from(item, name)
-      (item/name).inner_html
-    end
-  
   end
-  
 end

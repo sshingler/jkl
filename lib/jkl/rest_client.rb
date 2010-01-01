@@ -2,7 +2,6 @@ require 'net/http'
 require 'hpricot'
 
 module Jkl
-  
   class << self
     
     def post_to(uri, post_args)
@@ -31,10 +30,9 @@ module Jkl
       end
     end
   
-    def get_from_as_xml(uri)
+    def get_xml_from(uri)
       Hpricot.XML get_from uri
     end
   
   end
-
 end
