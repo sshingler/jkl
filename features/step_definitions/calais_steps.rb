@@ -18,7 +18,7 @@ When /^I post to calais$/ do
 end
 
 When /^I remove the unwanted items$/ do
-  @processed_json = Jkl::clean_unwanted_items_from_hash(JSON.parse(@response))
+  @processed_json = Jkl::Extraction::clean_unwanted_items_from_hash(JSON.parse(@response))
 end
 
 Then /^there should no longer be any "([^\"]*)"$/ do |arg1|
@@ -26,20 +26,20 @@ Then /^there should no longer be any "([^\"]*)"$/ do |arg1|
 end
 
 Then /^I should receive some tags$/ do
-  Jkl::get_tag_from_json(@response) do |tag| 
+  Jkl::Extraction::get_tag_from_json(@response) do |tag| 
     tag.should_not be_nil
   end
 end
 
 Then /^there should be some "([^\"]*)" tags$/ do |arg1|
-  Jkl::get_tag_from_json(@response) {|tag|
+  Jkl::Extraction::get_tag_from_json(@response) {|tag|
     #puts tag.inspect
     tag.each{|k,v| puts "#{k} : #{v}" if k=='_type'}
   }
 end
 
 Then /^I should be able to see the whole lot of tags as one block$/ do
-  tags = Jkl::get_tag_from_json(@response)
+  tags = Jkl::Extraction::get_tag_from_json(@response)
   tags.length.should > 0
 end
 

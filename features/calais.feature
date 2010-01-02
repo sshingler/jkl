@@ -3,21 +3,21 @@ Feature: Calais-Specific features
   As a developer
   I want to make some requests and inspect some responses
 
-  @connection_needed
+  @live
   Scenario: Post some very simple text to calais, inspect the response
 	  Given I have some simple text
     When I post to calais
     Then I should get a response
 	  And I should receive some tags
 
-  @connection_needed
+  @live
   Scenario: Post a mock story to calais, inspect the response
 	  Given I have a sanitized sample BBC story
     When I post to calais
     Then I should get a response
     And I should receive some tags
 
-  @connection_needed
+  @live
 	Scenario: Get nested tags from calais
 	  Given I have some simple text
     When I request the nested entities from calais

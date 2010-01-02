@@ -7,7 +7,7 @@ module Jkl
       def items(rss_doc)
         (rss_doc/:item)
       end
-
+      
       def links(items)
         items.map{|item| attribute_from(item,:link)}
       end

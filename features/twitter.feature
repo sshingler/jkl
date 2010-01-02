@@ -7,7 +7,7 @@ Feature: twitter features
     Given I have a mock twitter response
 	Then I should see some trends
 	
-  @connection_needed
+  @live
   Scenario: Get some json from twitter
     When I request trends data from twitter
     Then I should get a response

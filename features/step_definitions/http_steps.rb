@@ -6,12 +6,6 @@ When /^I post some data to yahoo$/ do
   @response = Jkl::post_to @url, post_args
 end
 
-When /^I request some RSS$/ do
-  keyphrase = @keyphrase || "iraq"
-  url = "#{YAML::load_file('config/config.yml')['topix']}#{CGI::escape(keyphrase)}"
-  @response = Jkl::get_xml_from url
-end
-
 Given /^I have some RSS$/ do
   raw = File.open('features/mocks/topix_rss.xml','r') {|f| f.readlines.to_s}
   @response = Hpricot.XML raw
@@ -22,7 +16,7 @@ When /^I make a restful get request$/ do
   @response = Jkl::get_from url
 end
 
-When /^I request some trends$/ do
+When /^I request some twitter trends$/ do
   twitter_json_url = YAML::load_file('config/config.yml')['twitter'] 
   output = JSON.parse Jkl::get_from twitter_json_url
   @response = output['trends']
@@ -30,17 +24,6 @@ end
 
 Then /^I should get a response$/ do
   @response.should_not == nil
-  #puts @response.inspect
-end
-
-Then /^I should receive some headlines$/ do
-  @items = Jkl::Rss::items @response
-  @links = []
-  @items.each do |item|
-    @links << Jkl::Rss::attribute_from(item, :link)
-  end
-  @links.should_not == nil
-  @links.length.should > 0
 end
 
 Then /^I should be able to get the copy from the first headline$/ do

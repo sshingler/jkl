@@ -3,24 +3,18 @@ Feature: http features
   As a developer
   I want to make some requests and inspect some responses
 
-  @connection_needed
+  @live
   Scenario: Make a restful post to yahoo
     When I post some data to yahoo
 	  Then I should get a response
 
-  @connection_needed
+  @live
   Scenario: Make a restful get
     When I make a restful get request
 	  Then I should get a response
 	  And I should see some text
 
-  @connection_needed
+  @live
   Scenario: Get some trends
-    When I request some trends
+    When I request some twitter trends
 	  Then I should get a response
-      
-  @connection_needed
-  Scenario: Get some RSS
-    When I request some RSS
-	  Then I should get a response
-    And I should receive some headlines
