@@ -2,34 +2,30 @@ require 'hpricot'
 require 'rest_client'
 
 module Jkl
-  
-  class << self
-    
-    def sanitize(text)
-      str = ""
-      text = text.to_s.gsub(/((<[\s\/]*script\b[^>]*>)([^>]*)(<\/script>))/i,"") #remove script tags - with contents
-      text.to_s.gsub(/<\/?[^>]*>/, "").split("\r").each do |l| # remove all tags
-        l = l.gsub(/^[ \t]/,"") #remove tabs
-        l = l.gsub(/^[ \s]/,"")
-        l.split("\n").each do |l|
-          str << l unless l.count(" ") < 5 # remove short lines - ususally just navigation
-        end
-      end
-      str
-    end
+  module Text
+    class << self
 
-    def from_doc(response)
-      begin
-        Hpricot(response)
-      rescue  URI::InvalidURIError => e
-        puts("WARN: Problem with getting a connection: #{e}")
-      rescue SocketError => e
-        puts("WARN: Could not connect to feed: #{e}")
-      rescue Errno::ECONNREFUSED  => e
-        puts("WARN: Connection refused: #{e}")
+      def sanitize(text)
+        remove_blank_lines strip_all_tags remove_script_tags text
       end
-    end
 
+      def strip_all_tags(text)
+        text.gsub(/<\/?[^>]*>/, "")
+      end
+      
+      def remove_blank_lines(text)
+        text.gsub(/\n\r|\r\n|\n|\r/,"")
+      end
+      
+      def remove_html_comments(text)
+        text.gsub(/<!--(.|\s)*?-->/,"")
+      end
+      
+      def remove_script_tags(text)
+        text = remove_html_comments(text)
+        text.gsub(/((<[\s\/]*script\b[^>]*>)([^>]*)(<\/script>))/i,"")
+      end
+
+    end
   end
-  
 end

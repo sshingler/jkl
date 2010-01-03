@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'> 
+  <head> 
+    <meta content='text/html; charset=utf-8' http-equiv='content-type' /> 
+    <title>Using Chowder for Simple Rack-based authentication - /dev/mull</title> 
+    <link href='/css/master.css' media='screen' rel='stylesheet' type='text/css' /> 
+    <link href='/articles.xml' rel='alternate' type='application/atom+xml' /> 
+    <link href='/dm.png' rel='icon' type='image/png' /> 
+    <script type='text/javascript'> 
+      function bob(){
+        alert("bob");
+      }
+    </script>
+  </head> 
+  <body> 
+    <div id='container'> 
+      <div id='wrapper'> 
+        <div class='breadcrumb'> 
+          <a href='/'>/dev/mull</a> 
+          &gt;
+          Using Chowder for Simple Rack-based authentication
+        </div> 
+        <div id='sidebar'> 
+          <h2>Articles by category</h2> 
+          <ul class='menu'> 
+            <li> 
+              <a href='/overheard'>Overheard</a> 
+            </li> 
+            <li> 
+              <a href='/published'>Published Articles</a> 
+            </li> 
+            <li> 
+              <a href='/ruby-and-jruby'>Ruby and JRuby</a> 
+            </li> 
+            <li> 
+              <a href='/snippets'>Snippets</a> 
+            </li> 
+          </ul> 
+          <div class='feed'> 
+            <a href='/articles.xml' rel='nofollow' title='Subscribe to our feed'> 
+              Subscribe to
+              our feed
+            </a> 
+          </div> 
+        </div> 
+        <div id='content'> 
+          <div class='date'>01 December 2009</div> 
+          <h1 id='using_chowder_for_simple_rackbased_authentication'>Using Chowder for Simple Rack-based authentication</h1> 
+          
+          <p>I have been searching for some time for a simple rack based authentication system.</p> 
+          
+          <p>Something just complex enough.</p> 
+          
+          <p>A key requirement for me is that I&#8217;d like it to work with the data storage mechanism of my choice (which this week is <a href='http://www.mongodb.org'>MongoDb</a>/<a href='http://github.com/jnunemaker/mongomapper'>MongoMapper</a>).</p> 
+          
+          <p>I spotted a <a href='http://groups.google.com/group/sinatrarb/browse_thread/thread/3cdd25a42a81df2b/ec01dd35bac50df4?lnk=gst&amp;q=chowder#ec01dd35bac50df4'>post</a> on the sinatra mailing list which mentioned a fairly new contender for this sort of thing, called <a href='http://github.com/ichverstehe/chowder'>chowder</a>.</p> 
+          
+          <p>It was really easy to get things going, although I found the parameters to &#8216;use&#8217; needed to be wrapped in {} - at least when using ruby 1.8.7 - I wonder if the chowder developers are on ruby 1.9 where that kind of voodoo is acceptable..?</p> 
+          
+          <p>I&#8217;ve sent in a <a href='http://github.com/sshingler/chowder/commit/eb99c52f9abee966226b35cf38b26ecd7915a7a1'>pull request</a> to <a href='http://twitter.com/ichverstehe'>@ichverstehe</a> - lets see if he accepts it :)</p> 
+          
+          <p>I&#8217;ve also put up a branch to a fledgling sinatra app which uses Chowder, complete with some cucumber features which test sign up and log out with a MongoDb/MongoMapper document store. That&#8217;s <a href='http://github.com/sshingler/mesomelas/commit/792218f26c58c6d41c4d0de2bf8df8f876f6b306'>here</a> on the basic-chowder-features branch.</p> 
+          <div class='categories'> 
+            Filed under
+            <a href='/snippets'>Snippets</a> 
+          </div> 
+          
+        </div> 
+        <div id='footer'> 
+          <p> 
+            Powered by lemons
+          </p> 
+        </div> 
+      </div> 
+    </div> 
+    <script type='text/javascript'> 
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script><script type='text/javascript'> 
+    try {
+      var pageTracker = _gat._getTracker("xxx");
+      pageTracker._trackPageview();
+    } catch(err) {}</script> 
+  </body> 
+</html>

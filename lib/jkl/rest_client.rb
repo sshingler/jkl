@@ -19,8 +19,8 @@ module Jkl
   
     def get_from(uri)
       begin
-        res = Net::HTTP.get_response(URI.parse(uri))
-        res.body
+        response = Net::HTTP.get_response(URI.parse(uri))
+        response.body
       rescue  URI::InvalidURIError => e
         puts("WARN: Invalid URI: #{e}")
       rescue SocketError => e
@@ -32,6 +32,10 @@ module Jkl
   
     def get_xml_from(uri)
       Hpricot.XML get_from uri
+    end
+    
+    def document_from(text)
+      Hpricot(text)
     end
   
   end

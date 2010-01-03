@@ -3,51 +3,57 @@ Feature: Processing features
   As a developer
   I want to make some requests and inspect some responses
 
-	@unit @text
-	Scenario: Sanitize some ok text
-		Given I have a keyphrase 'the cat sat on the mat'
-		When I sanitize this text
-		Then it should be ok
-		And it should say 'the cat sat on the mat'
-	
-	@unit @text
-	Scenario: Sanitize some short text
-		Given I have a keyphrase 'the cat sat'
-		When I sanitize this text
-		Then it should say ''
-	
-	@unit @text @wip
-		Scenario: Sanitize some text with tabs and spaces
-		Given I have a keyphrase 'the cat sat on 						the mat            '
-		When I sanitize this text
-		Then it should say 'the cat sat on the mat'
-	
-	@unit @text @wip
-		Scenario: Sanitize some short text with tabs and spaces
-		Given I have a keyphrase 'the   cat sat on 						           '
-		When I sanitize this text
-		Then it should say ''
+  @unit @text
+  Scenario: No changes needed
+    Given I have the text "the cat sat on the mat"
+    When I sanitize this text
+    Then there should be no script tags
+    And there should be no tags
+    And there should be no blank lines
+    And it should say "the cat sat on the mat"
 
-	@unit @text
-	Scenario: Sanitize some tagged short text
-		Given I have a keyphrase '<a href="a-link.html>the cat sat</a>'
-		When I sanitize this text
-		Then it should say ''
+  @unit @text
+  Scenario: Remove simple tags
+    Given I have the text "<a href=\"a-link.html\">the cat sat on the mat</a>"
+    When I sanitize this text
+    Then there should be no script tags
+    And there should be no tags
+    And there should be no blank lines
+    Then it should say "the cat sat on the mat"
 
-	@unit @text
-	Scenario: Sanitize some tagged text
-		Given I have a keyphrase '<a href="a-link.html>the cat sat on the mat</a>'
-		When I sanitize this text
-		Then it should be ok
-		Then it should say 'the cat sat on the mat'
-		
-	@unit @text @wip
-	Scenario: Remove script tags
-	  Given I have some script tag data
-	  When I sanitize this text
-	  Then it should say ' some para stuff here '
+  @unit @text @wip
+  Scenario: Remove script tags
+    Given I have some script tag data
+    When I sanitize this text
+    Then there should be no script tags
+    And there should be no tags
+    And there should be no blank lines
+    Then it should say "  some start stuff here     some para stuff here   some end stuff here"
 
-	Scenario: Clean a web page
-		Given I have a sample BBC story
-		When I sanitize this text
-		Then it should be ok
+  @mock
+  Scenario: Remove script tags
+    Given a sample web page
+    When I remove the script tags
+    Then there should be no script tags
+
+  @mock
+  Scenario: Remove all tags
+    Given a sample web page
+    When I remove the script tags
+    And I strip all the tags
+    Then there should be no script tags
+    And there should be no tags
+
+  @mock
+  Scenario: Remove empty lines
+    Given a stripped web page
+    When I remove the blank lines
+    Then there should be no blank lines
+
+  @mock
+  Scenario: Santize a sample BBC page
+    Given I have a sample BBC story
+    When I sanitize this text
+    Then there should be no script tags
+    And there should be no tags
+    And there should be no blank lines
