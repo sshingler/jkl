@@ -1,12 +1,42 @@
-= jkl
+# jkl
 
-* http://github.com/sshingler/jkl
+jkl (Jakal) does these things:
 
-== LICENSE:
+* Connects to URLs.
+* Gets stuff out of RSS feeds.
+* Gets the main content from web pages
+* Gets a set of metadata from a web page (using the calais gem)
+
+# Sample usage
+
+For example - if you had a RSS feed:
+
+  require "jkl"
+  feed = "http://www.topix.net/rss/search/article?x=0&y=0&q=London"
+
+You could collect some metadata from the links in that feed, thus:
+  
+  tags = []
+  Jkl::links(feed).each do |link|
+    tags << Jkl::tags("my_calais_key",link)
+  end
+  
+A metadata sample might look something like this:
+
+  {
+    "Person"=>["Barack Obama", "Hillary Clinton"], 
+    "Position"=>["Secretary of State"]
+  }
+  
+It is hosted at [gemcutter](http://gemcutter.org/gems/jakal)
+
+  gem install jakal
+
+# LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2009 FIXME full name
+Copyright (c) 2009 sshingler
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
