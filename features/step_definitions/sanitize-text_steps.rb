@@ -8,7 +8,7 @@ end
 
 Given /^I have some script tag data$/ do
   @text = <<-EOF;
-  some start stuff here
+  the cat sat on the mat
   <script type="text/javascript" charset="utf-8">
    function nofunction(){var bob;}
   </script>
@@ -17,12 +17,12 @@ Given /^I have some script tag data$/ do
     EOF
 end
 
-Given /^a sample web page$/ do
+Given /^I have a sample web page$/ do
   @text = File.open('features/mocks/sample-web-page.html','r') {|f| f.readlines.to_s}
 end
 
 Given /^a stripped web page$/ do
-  Given "a sample web page"
+  Given "I have a sample web page"
   When "I remove the script tags"
   And "I strip all the tags"
   Then "there should be no script tags"
@@ -33,8 +33,12 @@ When /^I sanitize this text$/ do
   @text = Jkl::Text::sanitize @text
 end
 
+When /^I examine the text$/ do
+  text = Jkl::Text::remove_tabs @text
+end
+
 Then "it should say \"$text\"" do |text|
-  @text.should == text
+  @text.to_s.should == text
 end
 
 Then /^I can read it$/ do
@@ -49,6 +53,14 @@ When /^I remove the blank lines$/ do
   @text = Jkl::Text::remove_blank_lines @text
 end
 
+When /^I remove the short lines$/ do
+  @text = Jkl::Text::remove_short_lines @text
+end
+
+When /^I clean it up$/ do
+  @text = Jkl::Text::remove_short_lines Jkl::Text:: strip_all_tags Jkl::Text::remove_script_tags @text
+  puts @text
+end
 
 When /^I strip all the tags$/ do
   @text = Jkl::Text::strip_all_tags @text
@@ -63,5 +75,6 @@ Then /^there should be no script tags$/ do
 end
 
 Then /^there should be no blank lines$/ do
-  @text.match(/\r|\n/).should be_nil
+  @text.match(/\r/).should be_nil
+  @text.match(/\n/).should be_nil
 end

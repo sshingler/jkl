@@ -28,17 +28,17 @@ Feature: Processing features
     Then there should be no script tags
     And there should be no tags
     And there should be no blank lines
-    Then it should say "  some start stuff here     some para stuff here   some end stuff here"
+    Then it should say "the cat sat on the mat"
 
   @mock
   Scenario: Remove script tags
-    Given a sample web page
+    Given I have a sample web page
     When I remove the script tags
     Then there should be no script tags
 
   @mock
   Scenario: Remove all tags
-    Given a sample web page
+    Given I have a sample web page
     When I remove the script tags
     And I strip all the tags
     Then there should be no script tags
@@ -49,7 +49,19 @@ Feature: Processing features
     Given a stripped web page
     When I remove the blank lines
     Then there should be no blank lines
-
+    
+  @mock
+  Scenario: Remove a short line
+    Given I have the text "the cat sat on the"
+    When I remove the short lines
+    Then it should say ""
+    
+  @mock
+  Scenario: Don't remove a long line
+    Given I have the text "the cat sat on the mat"
+    When I remove the short lines
+    Then it should say "the cat sat on the mat"
+    
   @mock
   Scenario: Santize a sample BBC page
     Given I have a sample BBC story

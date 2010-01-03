@@ -1,12 +1,9 @@
-require 'hpricot'
-require 'rest_client'
-
 module Jkl
   module Text
     class << self
 
       def sanitize(text)
-        remove_blank_lines strip_all_tags remove_script_tags text
+        remove_short_lines strip_all_tags remove_script_tags text
       end
 
       def strip_all_tags(text)
@@ -25,7 +22,16 @@ module Jkl
         text = remove_html_comments(text)
         text.gsub(/((<[\s\/]*script\b[^>]*>)([^>]*)(<\/script>))/i,"")
       end
-
+      
+      def remove_short_lines(text)
+        text = text.gsub(/\s\s/,"\n")
+        str = ""
+        text.split("\n").each do |l|
+          str << l unless l.count(" ") < 5 # remove short lines - ususally just navigation
+        end
+        str
+      end
+      
     end
   end
 end
