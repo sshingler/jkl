@@ -6,7 +6,6 @@ require 'hpricot'
 require 'json'
 require 'restclient'
 require 'haml' 
-require 'cgi'
 
 require 'lib/jkl.rb'
 

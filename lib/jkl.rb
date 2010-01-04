@@ -1,7 +1,7 @@
-require "lib/jkl/rest_client.rb"
-require "lib/jkl/rss_client.rb"
-require "lib/jkl/calais_client.rb"
-require "lib/jkl/text_client.rb"
+require "jkl/rest_client"
+require "jkl/rss_client"
+require "jkl/calais_client"
+require "jkl/text_client"
 
 module Jkl
   class << self
