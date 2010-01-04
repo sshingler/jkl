@@ -11,20 +11,20 @@ module Jkl
       end
       
       def remove_blank_lines(text)
-        text.gsub(/\n\r|\r\n|\n|\r/,"")
+        text.gsub(/\n\r|\r\n|\n|\r/, "")
       end
       
       def remove_html_comments(text)
-        text.gsub(/<!--(.|\s)*?-->/,"")
+        text.gsub(/<!--(.|\s)*?-->/, "")
       end
       
       def remove_script_tags(text)
         text = remove_html_comments(text)
-        text.gsub(/((<[\s\/]*script\b[^>]*>)([^>]*)(<\/script>))/i,"")
+        text.gsub(/((<[\s\/]*script\b[^>]*>)([^>]*)(<\/script>))/i, "")
       end
       
       def remove_short_lines(text)
-        text = text.gsub(/\s\s/,"\n")
+        text = text.gsub(/\s\s/, "\n")
         str = ""
         text.split("\n").each do |l|
           str << l unless l.count(" ") < 5 # remove short lines - ususally just navigation
