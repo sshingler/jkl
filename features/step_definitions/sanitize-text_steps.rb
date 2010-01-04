@@ -59,7 +59,6 @@ end
 
 When /^I clean it up$/ do
   @text = Jkl::Text::remove_short_lines Jkl::Text:: strip_all_tags Jkl::Text::remove_script_tags @text
-  puts @text
 end
 
 When /^I strip all the tags$/ do

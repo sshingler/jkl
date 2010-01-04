@@ -12,6 +12,5 @@ Then /^I can retrieve the tags$/ do
   key = YAML::load_file('config/keys.yml')['calais']
   links = Jkl::links(@feed)
   tags = Jkl::tags(key,links[rand(links.size)])
-  puts ""
-  puts tags.inspect
+  tags.should_not be_nil
 end

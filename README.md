@@ -31,7 +31,7 @@ A metadata sample might look something like this:
   
 It is hosted at [gemcutter](http://gemcutter.org/gems/jakal)
 
-  gem install jakal
+		gem install jakal
 
 # LICENSE:
 
