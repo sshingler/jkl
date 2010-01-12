@@ -3,7 +3,7 @@ module Jkl
     class << self
 
       def sanitize(text)
-        remove_short_lines strip_all_tags remove_script_tags text
+        remove_short_lines(strip_all_tags(remove_script_tags(text)))
       end
 
       def strip_all_tags(text)

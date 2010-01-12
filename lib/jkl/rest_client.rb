@@ -31,7 +31,7 @@ module Jkl
     end
   
     def get_xml_from(uri)
-      Hpricot.XML get_from uri
+      Hpricot.XML(get_from(uri))
     end
     
     def document_from(text)
