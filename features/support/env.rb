@@ -4,8 +4,7 @@ require 'spec/expectations'
 require 'rack/test'
 require 'hpricot'
 require 'json'
-require 'restclient'
-require 'haml' 
+require 'rest_client'
 
 require 'lib/jkl.rb'
 

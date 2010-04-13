@@ -7,7 +7,6 @@ module Jkl
       def calais_response(key, text)
         Calais.process_document(
             :content => text,
-            :content_type => :text, 
             :license_id => key
         )
       end

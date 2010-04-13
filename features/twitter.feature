@@ -3,14 +3,13 @@ Feature: twitter features
   As a developer
   I want to make some requests and inspect some responses
 
+  @wip
   Scenario: Work with twitter trends
     Given I have a mock twitter response
-	Then I should see some trends
+	  Then I should see some trends
 	
   @live
   Scenario: Get some json from twitter
     When I request trends data from twitter
     Then I should get a response
-	And I should see some trends
-	
-  
+	  And I should see some trends

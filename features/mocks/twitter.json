@@ -1,11 +1,11 @@
 {
     "trends": [{
         "name": "musicmonday",
-        "url": "http:\/\/search.twitter.com\/search?q=%23musicmonday"
+        "url": "http://search.twitter.com/search?q=%23musicmonday"
     },
     {
         "name": "GI Joe",
-        "url": "http:\/\/search.twitter.com\/search?q=%22GI+Joe%22+OR+Joe"
+        "url": "http://search.twitter.com/search?q=%22GI+Joe%22+OR+Joe"
     }],
     "as_of": "Mon, 10 Aug 2009 15:04:54 +0000"
 }
