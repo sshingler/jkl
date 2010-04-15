@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
   s.name = %q{jakal}
-  s.version = "0.1.3"
+  s.version = "0.1.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ['sshingler']
-  s.date = %q{2010-01-04}
+  s.date = %q{2010-04-13}
   s.description = %q{Jakal is a Ruby library which contains some utilities for connecting to internet based APIs.}
   s.email = %q{'shingler@gmail.com'}
   
@@ -21,7 +21,6 @@ Gem::Specification.new do |s|
             "features/mocks/bbc_story.html",
             "features/mocks/calais.json",
             "features/mocks/topix_rss.xml",
-            "features/mocks/twitter.json",
             "features/step_definitions/calais_steps.rb",
             "features/step_definitions/http_steps.rb",
             "features/step_definitions/sanitize-text_steps.rb",
@@ -36,5 +35,25 @@ Gem::Specification.new do |s|
   #s.rubyforge_project = %q{grit}
   s.rubygems_version = %q{1.3.4}
   s.summary = s.description
+  if s.respond_to? :specification_version then
+    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
+    s.specification_version = 2
 
+    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<hpricot>, [">= 0.8.2"])
+      s.add_runtime_dependency(%q<json>, [">= 1.2.4"])
+      s.add_runtime_dependency(%q<rest-client>, [">= 1.4.2"])
+      s.add_runtime_dependency(%q<calais>, [">= 0.0.9"])
+    else
+      s.add_dependency(%q<hpricot>, [">= 0.8.2"])
+      s.add_dependency(%q<json>, [">= 1.2.4"])
+      s.add_dependency(%q<rest-client>, [">= 1.4.2"])
+      s.add_dependency(%q<calais>, [">= 0.0.9"])
+    end
+  else
+    s.add_dependency(%q<hpricot>, [">= 0.8.2"])
+    s.add_dependency(%q<json>, [">= 1.2.4"])
+    s.add_dependency(%q<rest-client>, [">= 1.4.2"])
+    s.add_dependency(%q<calais>, [">= 0.0.9"])
+  end
 end

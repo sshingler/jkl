@@ -6,9 +6,9 @@ require 'hpricot'
 require 'json'
 require 'rest_client'
 
-require 'lib/jkl.rb'
-
+require 'lib/jkl'
 include Jkl
+
 
 class MyWorld
   include Rack::Test::Methods

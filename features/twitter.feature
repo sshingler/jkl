@@ -2,11 +2,6 @@ Feature: twitter features
   In order to grab some keywords from twitter
   As a developer
   I want to make some requests and inspect some responses
-
-  @wip
-  Scenario: Work with twitter trends
-    Given I have a mock twitter response
-	  Then I should see some trends
 	
   @live
   Scenario: Get some json from twitter

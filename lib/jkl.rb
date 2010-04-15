@@ -1,7 +1,10 @@
-require "lib/jkl/rss_client"
-require "lib/jkl/rest_client"
-require "lib/jkl/calais_client"
-require "lib/jkl/text_client"
+$:.unshift(File.dirname(__FILE__)) unless
+  $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
+
+require "jkl/rss_client"
+require "jkl/rest_client"
+require "jkl/calais_client"
+require "jkl/text_client"
 
 module Jkl
   class << self
