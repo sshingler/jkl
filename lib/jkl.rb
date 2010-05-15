@@ -16,10 +16,19 @@ module Jkl
       end
     end
     
+    def topix_links(keyphrase)
+      url = YAML::load_file('config/config.yml')['topix']
+      links("#{url}#{keyphrase}")
+    end
+    
     def tags(key, link)
       text = Jkl::Text::sanitize(Jkl::get_from(link))
       Jkl::Extraction::tags(key, text)
     end
 
+    def trends
+      url = YAML::load_file('config/config.yml')['twitter']
+      JSON.parse(Jkl::get_from(url))["trends"].map{|t| t["name"]}
+    end
   end
 end

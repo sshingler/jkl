@@ -5,6 +5,7 @@ module Jkl
       def sanitize(text)
         remove_short_lines(strip_all_tags(remove_script_tags(text)))
       end
+      alias :clean :sanitize
 
       def strip_all_tags(text)
         text.gsub(/<\/?[^>]*>/, "")
