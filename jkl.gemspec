@@ -1,11 +1,11 @@
 Gem::Specification.new do |s|
   s.name = %q{jakal}
-  s.version = "0.1.6"
+  s.version = "0.1.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ['sshingler']
   s.date = %q{2010-04-13}
-  s.description = %q{Jakal is a Ruby library which contains some utilities for connecting to internet based APIs.}
+  s.description = %q{Jakal is a Ruby library which contains some utilities for connecting to internet based APIs and cleaning text.}
   s.email = %q{'shingler@gmail.com'}
   
   s.extra_rdoc_files = ["README.md", "License.txt"]
@@ -15,25 +15,16 @@ Gem::Specification.new do |s|
             "lib/jkl/rest_client.rb", 
             "lib/jkl/rss_client.rb",  
             "lib/jkl/text_client.rb",
-            "features/calais.feature",
-            "features/http.feature",
-            "features/sanitize-text.feature",
-            "features/mocks/bbc_story.html",
-            "features/mocks/calais.json",
-            "features/mocks/topix_rss.xml",
-            "features/step_definitions/calais_steps.rb",
-            "features/step_definitions/http_steps.rb",
-            "features/step_definitions/sanitize-text_steps.rb",
-            "features/step_definitions/twitter_steps.rb",
-            "features/support/env.rb"
+            "test/fixtures/bbc_story.html",
+            "test/fixtures/topix_rss.xml",
+            "test/unit/jkl_test.rb",
+            "test/unit/text_cleaning_test.rb"
             ]
-  #s.test_files = FileList["{test}/**/*test.rb"].to_a
   s.has_rdoc = false
   s.homepage = %q{http://github.com/sshingler/jkl}
   s.rdoc_options = ["--inline-source", "--charset=UTF-8"]
   s.require_paths = ["lib"]
-  #s.rubyforge_project = %q{grit}
-  s.rubygems_version = %q{1.3.4}
+  s.rubygems_version = %q{1.3.6}
   s.summary = s.description
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
