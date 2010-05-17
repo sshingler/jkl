@@ -4,8 +4,9 @@ require 'hpricot'
 module Jkl
   class << self
     
-    def post_to(uri, post_args)
+    def post_to(url, post_args = {})
       begin
+        uri = URI.parse(url)
         resp, data = Net::HTTP.post_form(uri, post_args)
         data
       rescue  URI::InvalidURIError => e
