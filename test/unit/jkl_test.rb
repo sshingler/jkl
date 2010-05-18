@@ -66,15 +66,11 @@ class JklTest < Test::Unit::TestCase
   end
   def stub_topix
     url = YAML::load_file('config/config.yml')['topix']
-    response = raw = File.open('test/fixtures/topix_rss.xml','r') do |file| 
-      file.readlines.to_s
-    end
+    response = File.read('test/fixtures/topix_rss.xml')
     stub_request(:get, "#{url}London").to_return(:body => response)
   end  
   def stub_news_article
-    response = raw = File.open('test/fixtures/bbc_story.html','r') do |file| 
-      file.readlines.to_s
-    end
+    response = File.read('test/fixtures/bbc_story.html')
     stub_request(:get, "http://www.localnews8.com/Global/story.asp?S=10876507").to_return(
       :body => response
     )
