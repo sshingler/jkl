@@ -41,7 +41,6 @@ class JklTest < Test::Unit::TestCase
       EOF
       tags = Jkl::Extraction::tags(key, text)
       assert tags["Person"][0] == "Barack Obama"
-      puts Jkl::Extraction::entities(key,text)
     end
   end
   
