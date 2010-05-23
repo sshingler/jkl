@@ -2,8 +2,8 @@ module Jkl
   module Text
     class << self
 
-      def sanitize(text)
-        remove_short_lines(strip_all_tags(remove_script_tags(text)))
+      def sanitize(text, number = 5)
+        remove_short_lines(strip_all_tags(remove_script_tags(text)), number)
       end
       alias :clean :sanitize
 
@@ -24,12 +24,12 @@ module Jkl
         text.gsub(/((<[\s\/]*script\b[^>]*>)([^>]*)(<\/script>))/i, "")
       end
 
-      def remove_short_lines(text)
+      def remove_short_lines(text, number = 5)
         text = text.gsub(/\s\s/, "\n")
         str = ""
         # remove short lines - ususally just navigation
         text.split("\n").each do |l|
-          str << l unless l.count(" ") < 5
+          str << l unless l.count(" ") < number
         end
         str
       end
