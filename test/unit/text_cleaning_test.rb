@@ -16,6 +16,16 @@ HTML
       assert result == "the cat sat on the mat"
     end
     
+    should "Remove shorter lines" do
+      input = <<-HTML
+the cat sat on the mat
+the cat sat on the slightly fluffy, yet worn and homely mat
+a short line
+HTML
+      result = Jkl::Text::remove_short_lines(input, 8)
+      assert result == "the cat sat on the slightly fluffy, yet worn and homely mat"
+    end
+    
     should "Remove script tags" do
       input = <<-HTML
 the cat sat on the mat
