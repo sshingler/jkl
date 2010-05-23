@@ -27,7 +27,8 @@ module Jkl
     end
 
     def trends
-      url = YAML::load_file('config/config.yml')['twitter']
+      url = YAML::load_file('config/config.yml')['twitter'] || 
+          "http://search.twitter.com/trends.json"
       JSON.parse(Jkl::get_from(url))["trends"].map{|t| t["name"]}
     end
   end
