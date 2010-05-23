@@ -17,7 +17,8 @@ module Jkl
     end
     
     def topix_links(keyphrase)
-      url = YAML::load_file('config/config.yml')['topix']
+      url = YAML::load_file('config/config.yml')['topix'] || 
+          "http://www.topix.net/rss/search/article?q="
       links("#{url}#{keyphrase}")
     end
     
