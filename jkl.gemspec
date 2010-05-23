@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{jakal}
-  s.version = "0.1.8"
+  s.version = "0.1.9"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ['sshingler']
@@ -18,7 +18,8 @@ Gem::Specification.new do |s|
             "test/fixtures/bbc_story.html",
             "test/fixtures/topix_rss.xml",
             "test/unit/jkl_test.rb",
-            "test/unit/text_cleaning_test.rb"
+            "test/unit/text_cleaning_test.rb",
+            "config/config.yml"
             ]
   s.has_rdoc = false
   s.homepage = %q{http://github.com/sshingler/jkl}
