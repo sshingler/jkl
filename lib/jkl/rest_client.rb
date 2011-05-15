@@ -10,11 +10,11 @@ module Jkl
         resp, data = Net::HTTP.post_form(uri, post_args)
         data
       rescue  URI::InvalidURIError => e
-        puts("WARN: Invalid URI: #{e}")
+        puts("WARN: JKL Invalid URI: #{e}")
       rescue SocketError => e
-        puts("WARN: Could not connect: #{e}")
+        puts("WARN: JKL Could not connect: #{e}")
       rescue Errno::ECONNREFUSED  => e
-        puts("WARN: Connection refused: #{e}")
+        puts("WARN: JKL Connection refused: #{e}")
       end
     end
   
@@ -23,11 +23,11 @@ module Jkl
         response = Net::HTTP.get_response(URI.parse(uri))
         response.body
       rescue  URI::InvalidURIError => e
-        puts("WARN: Invalid URI: #{e}")
+        puts("WARN: JKL Invalid URI: #{e}")
       rescue SocketError => e
-        puts("WARN: Could not connect: #{e}")
+        puts("WARN: JKL Could not connect: #{e}")
       rescue Errno::ECONNREFUSED  => e
-        puts("WARN: Connection refused: #{e}")
+        puts("WARN: JKL Connection refused: #{e}")
       end
     end
   
