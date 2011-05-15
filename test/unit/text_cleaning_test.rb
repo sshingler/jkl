@@ -2,7 +2,7 @@ require "test/unit"
 require "shoulda"
 require "webmock/test_unit"
 require "yaml"
-require "lib/jkl"
+require_relative "../../lib/jkl"
 
 class TextCleaningTest < Test::Unit::TestCase
   context "Cleaning Text" do

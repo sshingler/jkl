@@ -1,7 +1,7 @@
 require "test/unit"
 require "shoulda"
 require "yaml"
-require "lib/jkl"
+require_relative "../../lib/jkl"
 
 class HttpTest < Test::Unit::TestCase
   

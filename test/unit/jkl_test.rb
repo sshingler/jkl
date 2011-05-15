@@ -2,7 +2,7 @@ require "test/unit"
 require "shoulda"
 require "webmock/test_unit"
 require "yaml"
-require "lib/jkl"
+require_relative "../../lib/jkl"
 
 class JklTest < Test::Unit::TestCase
   include WebMock
@@ -33,7 +33,9 @@ class JklTest < Test::Unit::TestCase
     end
     
     should "extract tags from some text" do
-      key = YAML::load_file('config/keys.yml')['calais']
+      keys = "config/keys.yml"
+      raise "READ:::::::: You need to create #{keys} and put your calais credentials in it." unless File.exist?(keys)
+      key = YAML::load_file(keys)['calais']
       text = <<-EOF
         Barack Obama said today that he expects there 
         to be conflict within his new security team after 
