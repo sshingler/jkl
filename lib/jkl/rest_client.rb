@@ -30,6 +30,12 @@ module Jkl
         puts("WARN: JKL Connection refused: #{e}")
       end
     end
+    
+    def get_from_over_https(host, path)
+      http = Net::HTTP.new(host, "443")
+      http.use_ssl = true
+      http.get2(path) # returns [status, data]
+    end
   
     def get_xml_from(uri)
       Hpricot.XML(get_from(uri))

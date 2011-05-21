@@ -5,7 +5,7 @@ require "yaml"
 require_relative "../../lib/jkl"
 
 class JklTest < Test::Unit::TestCase
-  include WebMock
+  include WebMock::API
 
   context "Using Jkl" do    
     setup do
