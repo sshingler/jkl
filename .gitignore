@@ -3,3 +3,5 @@ keys.yml
 coverage
 .bundle
 webrat.log
+._*
+.DS*
