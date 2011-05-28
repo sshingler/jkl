@@ -1,32 +1,22 @@
-$:.unshift(File.dirname(__FILE__)) unless
-  $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
+require_relative "jkl/rss_client"
+require_relative "jkl/calais_client"
+require_relative "jkl/text_client"
 
-require "jkl/rss_client"
-require "jkl/rest_client"
-require "jkl/calais_client"
-require "jkl/text_client"
+require "mechanize"
 
 module Jkl
   class << self
     
+    def get(url)
+      agent = Mechanize.new
+      agent.get(url).body
+    end
+    
     def links(feed)
-      links = Jkl::Rss::links(Jkl::Rss::items(Jkl::get_xml_from(feed)))
+      links = Jkl::Rss::links(Jkl::Rss::items(Jkl::get(feed)))
       links.each do |link|
         yield link if block_given?
       end
-    end
-    
-    def topix_links(keyphrase, url = "http://www.topix.net/rss/search/article?q=")
-      links("#{url}#{keyphrase}")
-    end
-    
-    def tags(key, link)
-      text = Jkl::Text::sanitize(Jkl::get_from(link))
-      Jkl::Extraction::tags(key, text)
-    end
-
-    def trends(url = "http://search.twitter.com/trends.json")
-      JSON.parse(Jkl::get_from(url))["trends"].map{|t| t["name"]}
     end
   end
 end

@@ -2,10 +2,10 @@ module Jkl
   module Text
     class << self
 
-      def sanitize(text, words_on_line = 5)
-        remove_short_lines(strip_all_tags(remove_script_tags(text)), words_on_line)
+      def plain_text(document, words_on_line = 5)
+        remove_short_lines(strip_all_tags(remove_script_tags(document)), words_on_line)
       end
-      alias :clean :sanitize
+      alias :sanitize :plain_text
 
       def strip_all_tags(text)
         text.gsub(/<\/?[^>]*>/, "")

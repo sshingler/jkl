@@ -2,78 +2,56 @@ require "test/unit"
 require "shoulda"
 require "webmock/test_unit"
 require "yaml"
+
 require_relative "../../lib/jkl"
 
 class JklTest < Test::Unit::TestCase
   include WebMock::API
 
-  context "Using Jkl" do    
+  context "for documents, plain text and tags" do
     setup do
-      stub_twitter
-      stub_topix
-      stub_news_article
+      @url = "http://www.bbc.co.uk"
+      response = File.read('test/fixtures/bbc_story.html')
+      stub_request(:get, @url).to_return(
+          :status => 200, 
+          :body => response, 
+          :headers => {'Content-Type' => 'text/html'})
     end
     
-    should "GET trends" do
-      trends = Jkl::trends
-      assert trends.length == 10
-      assert trends[0] == "London"
+    should "Get a document from a URL" do
+      doc = Jkl::get(@url)
+      assert_not_nil doc
     end
-    
-    should "GET news article URLS for a trend" do
-      articles = Jkl::topix_links(Jkl::trends[0])
-      assert articles.length == 2
-      assert articles[0] = "http://www.localnews8.com/Global/story.asp?S=10876507"
+  
+    should "Get the plain text version of a document" do
+      document = Jkl::get(@url)
+      text = Jkl::Text::plain_text(document,2)
+      assert_equal 8884, text.length
     end
-    
-    should "extract text from a news article" do
-      articles = Jkl::topix_links(Jkl::trends[0])
-      text = Jkl::Text::sanitize(Jkl::get_from(articles[0]))
-      assert_not_nil text
-    end
-    
-    should "extract tags from some text" do
-      keys = "config/keys.yml"
-      raise "READ:::::::: You need to create #{keys} and put your calais credentials in it." unless File.exist?(keys)
-      key = YAML::load_file(keys)['calais']
-      text = <<-EOF
-        Barack Obama said today that he expects there 
-        to be conflict within his new security team after 
-        confirming Hillary Clinton as his choice for US Secretary of State."
-      EOF
-      tags = Jkl::Extraction::tags(key, text)
-      assert tags["Person"][0] == "Barack Obama"
+  
+    should "Get the keywords from a document" do
+      document = Jkl::get(@url)
+      text = Jkl::Text::plain_text(document,2)
+      tags = Jkl::Extraction::tags(calais_key, text)
+      assert ! tags.empty?
     end
   end
   
-  private 
-  def stub_twitter
-    url = YAML::load_file('config/config.yml')['twitter']
-    response = <<-EOF
-    {"trends":[
-      {"name":"London","url":"http://search.twitter.com/search?q=London"},
-      {"name":"Geneva","url":"http://search.twitter.com/search?q=Geneva"},
-      {"name":"Kabul","url":"http://search.twitter.com/search?q=Kabul"},
-      {"name":"Chicago","url":"http://search.twitter.com/search?q=Chicago"},
-      {"name":"Cannes","url":"http://search.twitter.com/search?q=Cannes"},
-      {"name":"Verona","url":"http://search.twitter.com/search?q=Verona"},
-      {"name":"Milan","url":"http://search.twitter.com/search?q=Milan"},
-      {"name":"New York","url":"http://search.twitter.com/search?q=New%20York"},
-      {"name":"Paris","url":"http://search.twitter.com/search?q=Paris"},
-      {"name":"Melbourne","url":"http://search.twitter.com/search?q=Melbourne"}
-      ],"as_of":"Sat, 1 Jan 1970 00:00:00 +0000"}
-    EOF
-    stub_request(:get, url).to_return(:body => response)
+  context "for RSS" do
+    should "Get links from a feed" do
+      feed = "http://feeds.bbci.co.uk/news/rss.xml"
+      response = File.read('test/fixtures/topix_rss.xml')
+      stub_request(:get, "http://feeds.bbci.co.uk/news/rss.xml").
+          to_return(:status => 200, :body => response, :headers => {})
+      first_link = "http://www.localnews8.com/Global/story.asp?S=10876507"
+      assert_equal first_link, Jkl::links(feed).first
+    end
   end
-  def stub_topix
-    url = YAML::load_file('config/config.yml')['topix']
-    response = File.read('test/fixtures/topix_rss.xml')
-    stub_request(:get, "#{url}London").to_return(:body => response)
-  end  
-  def stub_news_article
-    response = File.read('test/fixtures/bbc_story.html')
-    stub_request(:get, "http://www.localnews8.com/Global/story.asp?S=10876507").to_return(
-      :body => response
-    )
-  end
+  
+  private
+    def calais_key
+      keys = "config/keys.yml"
+      raise "READ:::::::: You need to create #{keys} and put your calais credentials in it." unless File.exist?(keys)
+      YAML::load_file(keys)['calais']
+    end
 end

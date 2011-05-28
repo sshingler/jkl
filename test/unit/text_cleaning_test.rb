@@ -75,7 +75,7 @@ the cat sat on the mat
 <p> some para stuff here </p>
 some end stuff here
 HTML
-      result = Jkl::Text::clean input
+      result = Jkl::Text::plain_text(input)
       assert result == "the cat sat on the mat"
     end
   end

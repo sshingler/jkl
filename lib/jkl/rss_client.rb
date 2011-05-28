@@ -1,27 +1,15 @@
-require 'hpricot'
 
 module Jkl
   module Rss
     class << self
-
-      def items(rss_doc)
-        (rss_doc/:item)
+      def items(rss)
+        rss_doc = Nokogiri::Slop(rss)
+        rss_doc.rss.channel.item
       end
       
       def links(items)
-        items.map{|item| attribute_from(item,:link)}
+        items.map{|item| item.link.inner_html}
       end
-
-      def descriptions(items)
-        items.map do |item| 
-          attribute_from(item, :description).gsub("<![CDATA[","").gsub("]]>","")
-        end
-      end
-
-      def attribute_from(item, name)
-        (item/name).inner_html
-      end
-      
     end
   end
 end
