@@ -15,5 +15,5 @@ Gem::Specification.new do |s|
   s.add_dependency(%q<rake>, [">= 0.8.7"])
   s.add_dependency(%q<mechanize>, [">= 1.0.0"])
   s.add_dependency(%q<nokogiri>, ["~> 1.4.4"])
-  s.add_dependency(%q<calais>, [">= 0.0.11"])
+  s.add_dependency(%q<term-extract>, ["~> 0.5.1"])
 end

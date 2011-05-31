@@ -1,8 +1,8 @@
 require_relative "jkl/rss_client"
-require_relative "jkl/calais_client"
 require_relative "jkl/text_client"
 
 require "mechanize"
+require "term-extract"
 
 module Jkl
   class << self
@@ -17,6 +17,10 @@ module Jkl
       links.each do |link|
         yield link if block_given?
       end
+    end
+    
+    def tags(text)
+      TermExtract.extract(text.force_encoding("UTF-8")).keys
     end
   end
 end
