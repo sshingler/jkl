@@ -64,7 +64,7 @@ HTML
 <p>the cat sat on the mat</p>
 HTML
       result = Jkl::Text::strip_all_tags input
-      assert result == "the cat sat on the mat\n" #TODO fix carriage return
+      assert result == "the cat sat on the mat\n"
     end
   
     should "Clean text" do
@@ -78,6 +78,18 @@ some end stuff here
 HTML
       result = Jkl::Text::plain_text(input)
       assert result == "the cat sat on the mat\n"
+    end
+    
+    should "Remove HTML escaped characters" do
+      input = <<HTML
+Testing, testing, one two three.
+<p><strong>The cat didn&#39;t sit on the mat</strong></p>
+HTML
+      expected = <<EXPECTED
+Testing, testing, one two three.
+The cat didn't sit on the mat
+EXPECTED
+      assert_equal expected, Jkl::Text::plain_text(input, 2)
     end
   end
 end

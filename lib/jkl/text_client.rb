@@ -3,7 +3,10 @@ module Jkl
     class << self
 
       def plain_text(document, words_on_line = 5)
-        remove_short_lines(strip_all_tags(remove_script_tags(document)), words_on_line)
+        CGI::unescapeHTML(
+            remove_short_lines(
+                strip_all_tags(
+                    remove_script_tags(document)), words_on_line))
       end
       alias :sanitize :plain_text
 
@@ -32,7 +35,6 @@ module Jkl
         end
         str
       end
-      
     end
   end
 end
