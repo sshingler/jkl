@@ -27,9 +27,8 @@ module Jkl
       def remove_short_lines(text, words_on_line = 5)
         text = text.gsub(/\s\s/, "\n")
         str = ""
-        # remove short lines - ususally just navigation
-        text.split("\n").each do |l|
-          str << l unless l.count(" ") < words_on_line
+        text.split("\n").each do |line|
+          str << "#{line}\n" unless line.count(" ") < words_on_line
         end
         str
       end

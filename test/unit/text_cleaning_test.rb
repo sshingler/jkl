@@ -13,7 +13,7 @@ the cat sat on the mat
 a short line
 HTML
       result = Jkl::Text::remove_short_lines input
-      assert result == "the cat sat on the mat"
+      assert result == "the cat sat on the mat\n"
     end
     
     should "Remove shorter lines" do
@@ -23,7 +23,8 @@ the cat sat on the slightly fluffy, yet worn and homely mat
 a short line
 HTML
       result = Jkl::Text::remove_short_lines(input, 8)
-      assert result == "the cat sat on the slightly fluffy, yet worn and homely mat"
+      expected = "the cat sat on the slightly fluffy, yet worn and homely mat\n"
+      assert_equal expected, result
     end
     
     should "Remove script tags" do
@@ -35,7 +36,7 @@ function nofunction(){var bob;}
 a short line
 HTML
       result = Jkl::Text::remove_short_lines input
-      assert result == "the cat sat on the mat"
+      assert result == "the cat sat on the mat\n"
     end
     
     should "Remove html comments" do
@@ -45,7 +46,7 @@ the cat sat on the mat
 a short line
 HTML
       result = Jkl::Text::remove_short_lines input
-      assert result == "the cat sat on the mat"      
+      assert result == "the cat sat on the mat\n"
     end
     
     should "Remove blank lines" do
@@ -55,7 +56,7 @@ the cat sat on the mat
 a short line
 HTML
       result = Jkl::Text::remove_short_lines input
-      assert result == "the cat sat on the mat"
+      assert result == "the cat sat on the mat\n"
     end
     
     should "Strip all tags" do
@@ -76,7 +77,7 @@ the cat sat on the mat
 some end stuff here
 HTML
       result = Jkl::Text::plain_text(input)
-      assert result == "the cat sat on the mat"
+      assert result == "the cat sat on the mat\n"
     end
   end
 end

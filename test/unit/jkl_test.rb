@@ -25,7 +25,7 @@ class JklTest < Test::Unit::TestCase
     should "get the plain text version of a document" do
       document = Jkl::get(@url)
       text = Jkl::Text::plain_text(document,2)
-      assert_equal 8884, text.length
+      assert_equal 9009, text.length
     end
   
     should "get the keywords from a document" do
