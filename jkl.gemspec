@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{jakal}
-  s.version = "0.2.0"
+  s.version = "0.2.1"
   s.platform = Gem::Platform::RUBY
   s.authors = ['sshingler']
   s.homepage = %q{http://github.com/sshingler/jkl}
