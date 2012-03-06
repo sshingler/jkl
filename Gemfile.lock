@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    jakal (0.2.0)
+    jakal (0.2.1)
       mechanize (>= 1.0.0)
-      nokogiri (~> 1.4.4)
+      nokogiri (~> 1.5)
       rake (>= 0.8.7)
       term-extract (~> 0.5.1)
 
@@ -14,12 +14,24 @@ GEM
     archive-tar-minitar (0.5.2)
     columnize (0.3.2)
     crack (0.1.8)
+    domain_name (0.5.2)
+      unf (~> 0.0.3)
     linecache19 (0.5.12)
       ruby_core_source (>= 0.1.4)
-    mechanize (1.0.0)
-      nokogiri (>= 1.2.1)
-    nokogiri (1.4.4)
-    rake (0.8.7)
+    mechanize (2.3)
+      domain_name (~> 0.5, >= 0.5.1)
+      mime-types (~> 1.17, >= 1.17.2)
+      net-http-digest_auth (~> 1.1, >= 1.1.1)
+      net-http-persistent (~> 2.5, >= 2.5.2)
+      nokogiri (~> 1.4)
+      ntlm-http (~> 0.1, >= 0.1.1)
+      webrobots (~> 0.0, >= 0.0.9)
+    mime-types (1.17.2)
+    net-http-digest_auth (1.2)
+    net-http-persistent (2.5.2)
+    nokogiri (1.5.0)
+    ntlm-http (0.1.1)
+    rake (0.9.2.2)
     rbtagger (0.4.7)
     ruby-debug-base19 (0.11.25)
       columnize (>= 0.3.1)
@@ -32,23 +44,23 @@ GEM
     ruby_core_source (0.1.5)
       archive-tar-minitar (>= 0.5.2)
     shoulda (2.11.3)
-    term-extract (0.5.1)
-      rbtagger
+    term-extract (0.5.2)
+      rbtagger (~> 0.4.7)
     test-unit (2.3.0)
+    unf (0.0.5)
+      unf_ext
+    unf_ext (0.0.4)
     webmock (1.6.2)
       addressable (>= 2.2.2)
       crack (>= 0.1.7)
+    webrobots (0.0.13)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   jakal!
-  mechanize (>= 1.0.0)
-  nokogiri (~> 1.4.4)
-  rake (>= 0.8.7)
   ruby-debug19 (= 0.11.6)
   shoulda (= 2.11.3)
-  term-extract (~> 0.5.1)
   test-unit (= 2.3.0)
   webmock (= 1.6.2)
