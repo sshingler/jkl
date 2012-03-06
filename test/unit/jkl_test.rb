@@ -1,7 +1,6 @@
 require "test/unit"
 require "shoulda"
 require "webmock/test_unit"
-require "yaml"
 require_relative "../../lib/jkl"
 
 class JklTest < Test::Unit::TestCase
@@ -35,22 +34,4 @@ class JklTest < Test::Unit::TestCase
       assert ! tags.empty?
     end
   end
-  
-  context "Jkl: When handling RSS" do
-    should "get links from a feed" do
-      feed = "http://feeds.bbci.co.uk/news/rss.xml"
-      response = File.read('test/fixtures/topix_rss.xml')
-      stub_request(:get, "http://feeds.bbci.co.uk/news/rss.xml").
-          to_return(:status => 200, :body => response, :headers => {})
-      first_link = "http://www.localnews8.com/Global/story.asp?S=10876507"
-      assert_equal first_link, Jkl::Rss::links(Jkl::Rss::items(feed)).first
-    end
-  end
-  
-  private
-    def calais_key
-      keys = "config/keys.yml"
-      raise "READ:::::::: You need to create #{keys} and put your calais credentials in it." unless File.exist?(keys)
-      YAML::load_file(keys)['calais']
-    end
 end

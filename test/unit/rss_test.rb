@@ -23,5 +23,14 @@ class RssTest < Test::Unit::TestCase
       assert_equal 10, Jkl::Rss::links(items).count
       assert_equal 10, Jkl::Rss::descriptions(items).count
     end
+    
+    should "get a link from a feed" do
+      feed = "http://feeds.bbci.co.uk/news/rss.xml"
+      response = File.read('test/fixtures/topix_rss.xml')
+      stub_request(:get, "http://feeds.bbci.co.uk/news/rss.xml").
+          to_return(:status => 200, :body => response, :headers => {})
+      first_link = "http://www.localnews8.com/Global/story.asp?S=10876507"
+      assert_equal first_link, Jkl::Rss::links(Jkl::Rss::items(feed)).first
+    end
   end
 end

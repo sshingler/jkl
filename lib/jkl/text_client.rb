@@ -2,6 +2,7 @@ module Jkl
   module Text
     class << self
 
+      # document: an html/xml document as a string
       def plain_text(document, words_on_line = 5)
         CGI::unescapeHTML(
             remove_short_lines(
